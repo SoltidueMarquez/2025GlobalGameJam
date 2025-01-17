@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,8 +6,10 @@ public class Snake : MonoBehaviour
     [Header("蛇头设置")]
     public float moveSpeed = 5f;
     public float steerSpeed = 180f;
-    private Quaternion targetHorRotation;  // 目标旋转
-    private Quaternion targetVerRotation;  // 目标旋转
+    private Quaternion targetRotation;  // 目标旋转
+
+    private KeyCode verKey, horKey;
+    
     public GameObject bodyPrefab;
     private Rigidbody rb;
     
@@ -23,6 +24,9 @@ public class Snake : MonoBehaviour
     
     private void Start()
     {
+        verKey = KeyCode.Space;
+        horKey = KeyCode.Space;
+        
         rb = GetComponent<Rigidbody>();
         UpdateGap();
         lastBodyPart = transform;// 初始化头部位置
@@ -51,51 +55,29 @@ public class Snake : MonoBehaviour
         Vector3 moveDirection = transform.forward * (moveSpeed * Time.deltaTime);
         rb.MovePosition(rb.position + moveDirection);
 
-        /*float steerDirection = Input.GetAxis("Horizontal");
-        transform.Rotate(Vector3.up * (steerDirection * steerSpeed * Time.deltaTime));*/
+        // 根据按键设置方向
+        Vector3 inputDirection = Vector3.zero;
 
+        if (Input.GetKeyDown(KeyCode.W)) verKey = KeyCode.W;
+        if (Input.GetKeyDown(KeyCode.S)) verKey = KeyCode.S;
         
-        // 设置目标旋转，根据按键更新目标旋转角度
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, 0), steerSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, -180, 0), steerSpeed * Time.deltaTime);
-        }
+        if (Input.GetKeyDown(KeyCode.A)) horKey = KeyCode.A;
+        if (Input.GetKeyDown(KeyCode.D)) horKey = KeyCode.D;
         
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.W) && verKey == KeyCode.W) inputDirection.z = 1f;
+        if (Input.GetKey(KeyCode.S) && verKey == KeyCode.S) inputDirection.z = -1f;
+
+        if (Input.GetKey(KeyCode.A) && horKey == KeyCode.A) inputDirection.x = -1f;
+        if (Input.GetKey(KeyCode.D) && horKey == KeyCode.D) inputDirection.x = 1f;
+
+        // 计算目标旋转
+        if (inputDirection != Vector3.zero)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, -90, 0), steerSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 90, 0), steerSpeed * Time.deltaTime);
+            targetRotation = Quaternion.LookRotation(inputDirection);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, steerSpeed * Time.deltaTime);
         }
 
     }
-    
-    /*/// <summary>
-    /// 平滑旋转蛇头到目标角度。
-    /// </summary>
-    /// <param name="targetAngle">目标角度</param>
-    /// <param name="duration">旋转持续的时间</param>
-    private IEnumerator RotateHeadTo(Vector3 targetAngle, float duration)
-    {
-        Quaternion startRotation = transform.rotation;  // 当前角度
-        Quaternion endRotation = Quaternion.Euler(targetAngle);  // 目标角度
-        float timeElapsed = 0f;
-
-        while (timeElapsed < duration)
-        {
-            transform.rotation = Quaternion.Slerp(startRotation, endRotation, timeElapsed / duration);  // 平滑过渡
-            timeElapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.rotation = endRotation;  // 确保最终角度精确到目标
-    }*/
     #endregion
 
 
@@ -159,6 +141,7 @@ public class Snake : MonoBehaviour
         var newBodyPart = Instantiate(bodyPrefab, lastBodyPart.position, lastBodyPart.rotation);
         // 更新最后一部分的引用
         lastBodyPart = newBodyPart.transform;
+        lastBodyPart.SetParent(this.transform.parent);
         //初始化身体
         var newBody = newBodyPart.GetComponent<SnakeBody>();
         newBody.Init(lateActiveTime);
