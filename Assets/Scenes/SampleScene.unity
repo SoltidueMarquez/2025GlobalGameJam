@@ -653,9 +653,10 @@ MonoBehaviour:
   moveSpeed: 5
   steerSpeed: 180
   rotateTime: 0.2
-  bodyFollowRate: 0.9
   bodyPrefab: {fileID: 8789796908835976766, guid: 03b7c12ddecc3984a928dc8a057ba39b,
     type: 3}
+  lateActiveTime: 0.1
+  gap: 10
 --- !u!1 &1389362939
 GameObject:
   m_ObjectHideFlags: 0

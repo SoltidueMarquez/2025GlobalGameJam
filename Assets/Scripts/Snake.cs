@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,16 +9,20 @@ public class Snake : MonoBehaviour
     public float moveSpeed = 5f;
     public float steerSpeed = 180f;
     public float rotateTime = 0.2f;
-    [Range(0.1f, 0.9f)] public float bodyFollowRate;
     public GameObject bodyPrefab;
-
-    private List<Transform> bodyParts = new List<Transform>(); // 身体部分列表
+    public float lateActiveTime = 0.5f;
+    private List<SnakeBody> bodyParts = new List<SnakeBody>(); // 身体部分列表
     private Transform lastBodyPart; // 最后一部分，便于定位新生成位置
-
+    
+    private List<Vector3> headPositions = new List<Vector3>(); // 蛇头位置列表
+    private int positionListSize; // 控制位置列表的长度
+    public int gap;
+    
     private void Start()
     {
-        // 初始化头部位置
-        lastBodyPart = transform;
+        lastBodyPart = transform;// 初始化头部位置
+        headPositions.Add(transform.position); // 初始化位置列表，保存初始位置
+        positionListSize = 2*gap;
     }
 
     private void Update()
@@ -25,7 +30,7 @@ public class Snake : MonoBehaviour
         // 头部移动
         MoveHead();
 
-        // 身体部分跟随
+        // 身体部分根据位置列表更新
         MoveBodyParts();
 
         // 按下空格添加身体
@@ -35,6 +40,13 @@ public class Snake : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        // 更新头部位置列表
+        UpdateHeadPositions();
+    }
+
+    #region 移动控制
     /// <summary>
     /// 控制蛇头移动。
     /// </summary>
@@ -63,7 +75,7 @@ public class Snake : MonoBehaviour
             StartCoroutine(RotateHeadTo(new Vector3(0, 90, 0), rotateTime));  // 在1秒内旋转到(0, 90, 0)
         }
     }
-
+    
     /// <summary>
     /// 平滑旋转蛇头到目标角度。
     /// </summary>
@@ -84,26 +96,42 @@ public class Snake : MonoBehaviour
 
         transform.rotation = endRotation;  // 确保最终角度精确到目标
     }
+    #endregion
 
 
     /// <summary>
-    /// 让身体部分平滑跟随。
+    /// 更新蛇头位置列表。
+    /// </summary>
+    private void UpdateHeadPositions()
+    {
+        headPositions.Insert(0, transform.position);  // 插入蛇头当前位置到列表开头
+        if (headPositions.Count > positionListSize) 
+        {
+            headPositions.RemoveAt(headPositions.Count - 1);  // 删除多余的位置
+        }
+    }
+    
+    /// <summary>
+    /// 让身体部分根据位置列表更新。
     /// </summary>
     private void MoveBodyParts()
     {
-        Vector3 previousPosition = transform.position;
+        if (bodyParts.Count == 0) return;
 
-        foreach (Transform bodyPart in bodyParts)
+        // 身体部分按顺序更新位置
+        for (int i = 0; i < bodyParts.Count; i++)
         {
-            // 平滑跟随前一部分的位置
-            Vector3 nextPosition = Vector3.Lerp(bodyPart.position, previousPosition, bodyFollowRate * moveSpeed * Time.deltaTime);
-            bodyPart.position = nextPosition;
+            var body = bodyParts[i];
+            if (!body.ifActive) continue;
 
-            // 朝向前一部分
-            bodyPart.LookAt(previousPosition);
+            // 获取当前位置列表中的相应位置
+            Vector3 targetPosition = headPositions[Mathf.Min(i * gap, headPositions.Count - 1)];
 
-            // 更新参考位置
-            previousPosition = bodyPart.position;
+            // 平滑跟随目标位置
+            body.bodyTransform.position = Vector3.Lerp(body.bodyTransform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+            // 朝向目标位置
+            body.bodyTransform.LookAt(targetPosition);
         }
     }
 
@@ -112,13 +140,36 @@ public class Snake : MonoBehaviour
     /// </summary>
     private void AddBodyPart()
     {
+        positionListSize += gap;//位置列表增长
         // 生成新身体部分并设置其位置和旋转
         Transform newBodyPart = Instantiate(bodyPrefab, lastBodyPart.position, lastBodyPart.rotation).transform;
 
         // 更新最后一部分的引用
         lastBodyPart = newBodyPart;
 
+        var newBody = new SnakeBody(newBodyPart, false);
+        
         // 添加到身体列表
-        bodyParts.Add(newBodyPart);
+        bodyParts.Add(newBody);
+        StartCoroutine(ActivateBody(newBody)); // 延时激活
+    }
+
+    private IEnumerator ActivateBody(SnakeBody body)
+    {
+        yield return new WaitForSeconds(lateActiveTime);
+        body.ifActive = true;
+    }
+}
+
+
+public class SnakeBody
+{
+    public Transform bodyTransform;
+    public bool ifActive;
+
+    public SnakeBody(Transform bodyTransform, bool ifActive)
+    {
+        this.bodyTransform = bodyTransform;
+        this.ifActive = ifActive;
     }
 }
