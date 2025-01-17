@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 805081784701694339}
   - component: {fileID: 7637612275960342845}
   - component: {fileID: 6506934493065552017}
+  - component: {fileID: 8641322417621053680}
   m_Layer: 0
   m_Name: Snake Body
   m_TagString: Untagged
@@ -105,3 +106,15 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8641322417621053680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8789796908835976766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eef251c1b7c47759c4e9b48973ab1ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
