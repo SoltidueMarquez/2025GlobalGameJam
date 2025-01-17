@@ -1,26 +1,45 @@
 ﻿using UnityEngine;
 
-public class Utils
+public static class Utils
 {
+    private const int maxTryCount = 20;
+
     public static Vector3 GetRandomPosition(float xRange, float zRange, float radius = 1f)
     {
         Vector3 randomPosition = Vector3.zero;
-        bool positionFound = false;
-
-        // 循环直到找到一个没有物体的随机位置
-        while (!positionFound)
+    
+        // 循环直到找到一个没有物体的随机位置，最多尝试20次
+        for (int attempts = 0; attempts < maxTryCount; attempts++)
         {
             // 生成随机坐标
             randomPosition = new Vector3(Random.Range(-xRange, xRange), 0, Random.Range(-zRange, zRange));
 
-            // 检查该位置是否有物体（通过检查半径范围内的碰撞）
-            if (!Physics.CheckSphere(randomPosition, radius))
+            // 使用OverlapSphere检查当前位置的碰撞器
+            Collider[] colliders = Physics.OverlapSphere(randomPosition, radius);
+
+            bool positionValid = true;
+
+            // 检查是否有碰撞器，且是否有标记为"Tool"的物体
+            foreach (var collider in colliders)
             {
-                positionFound = true; // 没有物体就接受这个位置
+                if (collider.CompareTag("Tool") || collider.CompareTag("Player"))
+                {
+                    positionValid = false;
+                    break;
+                }
+            }
+
+            // 如果当前位置没有被物体占据，并且不包含标记为"Tool"的物体，返回位置
+            if (positionValid)
+            {
+                return randomPosition;
             }
         }
 
+        // 如果超出最大尝试次数，返回最后生成的位置
         return randomPosition;
     }
+
+
 
 }
