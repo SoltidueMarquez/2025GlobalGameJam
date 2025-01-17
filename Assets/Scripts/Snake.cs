@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Snake : MonoBehaviour
 {
@@ -7,10 +8,9 @@ public class Snake : MonoBehaviour
     public float moveSpeed = 5f;
     public float steerSpeed = 180f;
     private Quaternion targetRotation;  // 目标旋转
-
+    [FormerlySerializedAs("keys")] public SnakeSettings snakeSettings;
     private KeyCode verKey, horKey;
     
-    public GameObject bodyPrefab;
     private Rigidbody rb;
     
     [Header("蛇身跟随设置")]
@@ -53,17 +53,17 @@ public class Snake : MonoBehaviour
         // 根据按键设置方向
         Vector3 inputDirection = Vector3.zero;
 
-        if (Input.GetKeyDown(KeyCode.W)) verKey = KeyCode.W;
-        if (Input.GetKeyDown(KeyCode.S)) verKey = KeyCode.S;
+        if (Input.GetKeyDown(snakeSettings.up)) verKey = snakeSettings.up;
+        if (Input.GetKeyDown(snakeSettings.down)) verKey = snakeSettings.down;
         
-        if (Input.GetKeyDown(KeyCode.A)) horKey = KeyCode.A;
-        if (Input.GetKeyDown(KeyCode.D)) horKey = KeyCode.D;
+        if (Input.GetKeyDown(snakeSettings.left)) horKey = snakeSettings.left;
+        if (Input.GetKeyDown(snakeSettings.right)) horKey = snakeSettings.right;
         
-        if (Input.GetKey(KeyCode.W) && verKey == KeyCode.W) inputDirection.z = 1f;
-        if (Input.GetKey(KeyCode.S) && verKey == KeyCode.S) inputDirection.z = -1f;
+        if (Input.GetKey(snakeSettings.up) && verKey == snakeSettings.up) inputDirection.z = 1f;
+        if (Input.GetKey(snakeSettings.down) && verKey == snakeSettings.down) inputDirection.z = -1f;
 
-        if (Input.GetKey(KeyCode.A) && horKey == KeyCode.A) inputDirection.x = -1f;
-        if (Input.GetKey(KeyCode.D) && horKey == KeyCode.D) inputDirection.x = 1f;
+        if (Input.GetKey(snakeSettings.left) && horKey == snakeSettings.left) inputDirection.x = -1f;
+        if (Input.GetKey(snakeSettings.right) && horKey == snakeSettings.right) inputDirection.x = 1f;
 
         // 计算目标旋转
         if (inputDirection != Vector3.zero)
@@ -133,7 +133,7 @@ public class Snake : MonoBehaviour
     public void AddBodyPart()
     {
         // 生成新身体部分并设置其位置和旋转
-        var newBodyPart = Instantiate(bodyPrefab, lastBodyPart.position, lastBodyPart.rotation);
+        var newBodyPart = Instantiate(snakeSettings.bodyPrefab, lastBodyPart.position, lastBodyPart.rotation);
         // 更新最后一部分的引用
         lastBodyPart = newBodyPart.transform;
         lastBodyPart.SetParent(this.transform.parent);
@@ -142,6 +142,7 @@ public class Snake : MonoBehaviour
         newBody.Init(lateActiveTime);
         bodyParts.Add(newBody);// 添加到身体列表
     }
-
 }
+
+
 
