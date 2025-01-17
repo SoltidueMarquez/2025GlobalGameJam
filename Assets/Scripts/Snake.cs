@@ -39,11 +39,6 @@ public class Snake : MonoBehaviour
         MoveHead();
         // 身体部分根据位置列表更新
         MoveBodyParts();
-        // 按下空格添加身体
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            AddBodyPart();
-        }
     }
 
     #region 移动控制
@@ -135,7 +130,7 @@ public class Snake : MonoBehaviour
     /// <summary>
     /// 添加新的身体部分。
     /// </summary>
-    private void AddBodyPart()
+    public void AddBodyPart()
     {
         // 生成新身体部分并设置其位置和旋转
         var newBodyPart = Instantiate(bodyPrefab, lastBodyPart.position, lastBodyPart.rotation);
