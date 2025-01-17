@@ -16,15 +16,18 @@ public class Snake : MonoBehaviour
     
     private List<Vector3> headPositions = new List<Vector3>(); // 蛇头位置列表
     private int positionListSize; // 控制位置列表的长度
-    public int gap;
+    public float interval = 10;
+    private int gap;
     
     private void Start()
     {
+        UpdateGap();
         lastBodyPart = transform;// 初始化头部位置
         headPositions.Add(transform.position); // 初始化位置列表，保存初始位置
+        
         positionListSize = 2*gap;
     }
-
+    
     private void Update()
     {
         // 头部移动
@@ -44,6 +47,12 @@ public class Snake : MonoBehaviour
     {
         // 更新头部位置列表
         UpdateHeadPositions();
+        UpdateGap();
+    }
+
+    private void UpdateGap()
+    {
+        gap = Mathf.RoundToInt(interval / (Time.fixedDeltaTime * moveSpeed));
     }
 
     #region 移动控制
