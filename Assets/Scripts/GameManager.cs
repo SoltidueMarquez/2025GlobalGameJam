@@ -42,7 +42,14 @@ public class GameManager : MonoBehaviour
         UITip.SetActive(false);
         if (AudioManager.Instance != null)
         {
-            AudioManager.Instance.PlayMusic("Game");
+            if (SceneLoadManager.Instance.playerNum <= 2)
+            {
+                AudioManager.Instance.PlayMusic("Game1");
+            }
+            else
+            {
+                AudioManager.Instance.PlayMusic("Game2");
+            }
         }
     }
 

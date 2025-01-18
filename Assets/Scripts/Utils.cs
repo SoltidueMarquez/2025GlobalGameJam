@@ -22,7 +22,8 @@ public static class Utils
             // 检查是否有碰撞器，且是否有标记为"Tool"的物体
             foreach (var collider in colliders)
             {
-                if (collider.CompareTag("Tool") || collider.CompareTag("Player"))
+                if (collider.CompareTag("Tool") || collider.CompareTag("Player1") || collider.CompareTag("Player2") ||
+                    collider.CompareTag("Player3") || collider.CompareTag("Player4")) 
                 {
                     positionValid = false;
                     break;
@@ -48,7 +49,8 @@ public static class Utils
         }
         else
         {
-            return other.CompareTag("Player1")||other.CompareTag("Player2")||other.CompareTag("Player3");
+            return other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("Player3") ||
+                   other.CompareTag("Player4");
         }
     }
 
@@ -60,7 +62,8 @@ public static class Utils
         }
         else
         {
-            return other.gameObject.CompareTag("Player1")||other.gameObject.CompareTag("Player2")||other.gameObject.CompareTag("Player3");
+            return other.gameObject.CompareTag("Player1") || other.gameObject.CompareTag("Player2") ||
+                   other.gameObject.CompareTag("Player3") || other.gameObject.CompareTag("Player4");
         }
     }
 }

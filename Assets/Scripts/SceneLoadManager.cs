@@ -3,6 +3,8 @@
 public class SceneLoadManager : PersistentSingleton<SceneLoadManager>
 {
     public string startSceneName = "StartScene";
+    public int playerNum = 2;
+    
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);

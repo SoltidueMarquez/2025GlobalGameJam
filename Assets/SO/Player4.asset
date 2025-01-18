@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d36efdcbde5044d58f37707610639ccb, type: 3}
-  m_Name: Player3
+  m_Name: Player4
   m_EditorClassIdentifier: 
-  up: 105
-  down: 107
-  left: 106
-  right: 108
+  up: 261
+  down: 258
+  left: 257
+  right: 259
   bodyPrefab: {fileID: 8789796908835976766, guid: 03b7c12ddecc3984a928dc8a057ba39b,
     type: 3}
-  playerTag: Player3
+  playerTag: Player4
