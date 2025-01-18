@@ -15,9 +15,21 @@ public class PauseUI : MonoBehaviour
         Continue();
         musicSlider.InitSlider();
         soundSlider.InitSlider();
-        continueButton.onClick.AddListener(Continue);
-        restartButton.onClick.AddListener(SceneLoadManager.Instance.Reload);
-        backButton.onClick.AddListener(SceneLoadManager.Instance.GoToStart);
+        continueButton.onClick.AddListener(()=>
+        {
+            Continue();
+            if(AudioManager.Instance!=null) AudioManager.Instance.PlayRandomSound("Click");
+        });
+        restartButton.onClick.AddListener(() =>
+        {
+            SceneLoadManager.Instance.Reload();
+            if(AudioManager.Instance!=null) AudioManager.Instance.PlayRandomSound("Click");
+        });
+        backButton.onClick.AddListener(() =>
+        {
+            SceneLoadManager.Instance.GoToStart();
+            if(AudioManager.Instance!=null) AudioManager.Instance.PlayRandomSound("Click");
+        });
     }
 
     private void Continue()
@@ -49,7 +61,11 @@ public class AudioSlider
                 AudioManager.Instance.SetMasterVolume(slider.value);
                 slider.onValueChanged.AddListener((value) =>
                 {
-                    AudioManager.Instance.SetMasterVolume(value);
+                    if (AudioManager.Instance != null)
+                    {
+                        AudioManager.Instance.SetMasterVolume(value);
+                        AudioManager.Instance.PlayRandomSound("Click");
+                    }
                 });
                 break;
             case AudioType.Music:
@@ -57,7 +73,11 @@ public class AudioSlider
                 AudioManager.Instance.SetMusicVolume(slider.value);
                 slider.onValueChanged.AddListener((value) =>
                 {
-                    AudioManager.Instance.SetMusicVolume(value);
+                    if (AudioManager.Instance != null)
+                    {
+                        AudioManager.Instance.SetMusicVolume(value);
+                        AudioManager.Instance.PlayRandomSound("Click");
+                    }
                 });
                 break;
             case AudioType.Sound:
@@ -65,7 +85,11 @@ public class AudioSlider
                 AudioManager.Instance.SetSfxVolume(slider.value);
                 slider.onValueChanged.AddListener((value) =>
                 {
-                    AudioManager.Instance.SetSfxVolume(value);
+                    if (AudioManager.Instance != null)
+                    {
+                        AudioManager.Instance.SetSfxVolume(value);
+                        AudioManager.Instance.PlayRandomSound("Click");
+                    }
                 });
                 break;
             default:

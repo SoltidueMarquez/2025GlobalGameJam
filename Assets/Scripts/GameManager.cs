@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,7 +33,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         onTimesUp.AddListener(GameOver);
-        Time.timeScale = 1;
         countTime.Init(startTime, onTimesUp);
         //设置倒计时加速
         foreach (var checkTime in rushCheckTimeList)
@@ -42,6 +40,10 @@ public class GameManager : MonoBehaviour
             countTime.AddCheckPoint(checkTime, Rush);
         }
         UITip.SetActive(false);
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayMusic("Game");
+        }
     }
 
     private void Update()
@@ -61,8 +63,20 @@ public class GameManager : MonoBehaviour
 
     private void InitGameOverPanel()
     {
-        backButton.onClick.AddListener(SceneLoadManager.Instance.GoToStart);
-        restartButton.onClick.AddListener(SceneLoadManager.Instance.Reload);
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopMusic();
+            AudioManager.Instance.PlayRandomSound("GameOver");
+        }
+        backButton.onClick.AddListener(()=>{
+            SceneLoadManager.Instance.GoToStart();
+            if(AudioManager.Instance!=null) AudioManager.Instance.PlayRandomSound("Click");
+        });
+        restartButton.onClick.AddListener(() =>
+        {
+            SceneLoadManager.Instance.Reload();
+            if(AudioManager.Instance!=null) AudioManager.Instance.PlayRandomSound("Click");
+        });
         
         var playerNames = "";
         int maxScore = 0;

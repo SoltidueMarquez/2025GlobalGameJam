@@ -12,6 +12,7 @@ public class CandyBubble : MonoBehaviour, IInit
         if (Utils.CheckIfPlayer(other))
         {
             other.GetComponent<Snake>().AddBodyPart();
+            if(AudioManager.Instance!=null) AudioManager.Instance.PlayRandomSound("Eat");
             Destroy(gameObject);
         }
     }

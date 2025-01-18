@@ -174,6 +174,7 @@ public class Snake : MonoBehaviour
     /// </summary>
     public void Die()
     {
+        if(AudioManager.Instance!=null) AudioManager.Instance.PlayRandomSound("Die");
         foreach (var body in bodyParts.Where(body => Random.Range(0f, 1f) < createBubbleRate))
         {
             ToolManager.Instance.CreateCandy(body.transform.position);

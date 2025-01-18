@@ -39,7 +39,11 @@ public class StartSceneUIManager : MonoBehaviour
         closeStartPanelButton.onClick.AddListener(CloseStartPanelButtonClicked);
         closeTeamPanelButton.onClick.AddListener(CloseTeamPanelButtonClicked);
 
-        AudioManager.Instance.UpdateVolume();
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.UpdateVolume();
+            AudioManager.Instance.PlayMusic("Start");
+        }
         Time.timeScale = 1;
 
 

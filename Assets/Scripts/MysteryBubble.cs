@@ -17,6 +17,7 @@ public class MysteryBubble : MonoBehaviour, IInit
         {
             var snake = other.GetComponent<Snake>();
             MakeEffect(snake);
+            if(AudioManager.Instance!=null) AudioManager.Instance.PlayRandomSound("Mystery");
             Destroy(gameObject);
         }
     }
