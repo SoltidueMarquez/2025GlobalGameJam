@@ -39,6 +39,10 @@ public class StartSceneUIManager : MonoBehaviour
         closeStartPanelButton.onClick.AddListener(CloseStartPanelButtonClicked);
         closeTeamPanelButton.onClick.AddListener(CloseTeamPanelButtonClicked);
 
+        AudioManager.Instance.UpdateVolume();
+        Time.timeScale = 1;
+
+
     }
 
     private void StartButtonClicked()
