@@ -798,6 +798,139 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &429646222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 429646223}
+  - component: {fileID: 429646225}
+  - component: {fileID: 429646224}
+  m_Layer: 5
+  m_Name: Rush Tip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &429646223
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429646222}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1648692957}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 300, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &429646224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429646222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u51B2\u523A\uFF01\uFF01\uFF01"
+--- !u!222 &429646225
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429646222}
+  m_CullTransparentMesh: 1
+--- !u!1 &604937276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 604937277}
+  - component: {fileID: 604937278}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &604937277
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604937276}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &604937278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604937276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0577c21a506c1754296d676ab4826aa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countTime: {fileID: 261630368}
+  startTime: 50
+  deltaSpeed: 5
+  rushCheckTimeList:
+  - 40
+  - 20
+  - 10
+  countTextPrefab: {fileID: 3242148981905613991, guid: 474721907e4e2df4a9af63ac6cb5c651,
+    type: 3}
+  UITip: {fileID: 429646222}
 --- !u!1001 &634999712
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1116,7 +1249,6 @@ GameObject:
   - component: {fileID: 1648692956}
   - component: {fileID: 1648692955}
   - component: {fileID: 1648692954}
-  - component: {fileID: 1648692958}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -1202,6 +1334,7 @@ RectTransform:
   - {fileID: 261630367}
   - {fileID: 752494231}
   - {fileID: 231248729}
+  - {fileID: 429646223}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1209,22 +1342,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1648692958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1648692953}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0577c21a506c1754296d676ab4826aa4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  countTime: {fileID: 261630368}
-  startTime: 90
-  countTextPrefab: {fileID: 3242148981905613991, guid: 474721907e4e2df4a9af63ac6cb5c651,
-    type: 3}
 --- !u!1001 &1702573134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1353,7 +1470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d791d32a50784a8facad183c8eabf59c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 5
   steerSpeed: 180
   speedRange: {x: 3, y: 20}
   lateActiveTime: 0.1
@@ -1369,9 +1486,9 @@ MonoBehaviour:
     settings: {fileID: 11400000, guid: e257b7948a590c04188c76a4bd3b5abb, type: 2}
     uiParent: {fileID: 231248729}
     scoreText: {fileID: 1883699549}
-  radius: 3
+  radius: 2
   createBubbleRate: 0.33333334
-  range: {x: 40, y: 15, z: 1}
+  range: {x: 30, y: 15, z: 2}
   waitTime: 3
 --- !u!1 &1883699547
 GameObject:
@@ -1576,13 +1693,16 @@ MonoBehaviour:
     prefab: {fileID: 487247121603256809, guid: 7679f152ecaac214baf5e2fddf838dd5, type: 3}
     setting: {fileID: 11400000, guid: b1029c8eee1c23b44afd2aea89964d0c, type: 2}
     list: []
+    timer: 0
   mystery:
     prefab: {fileID: 4840408674752413493, guid: 066ca81982e7001489bb947ddbf89694,
       type: 3}
     setting: {fileID: 11400000, guid: aa682f260e662ad4383bd6b53379b7d1, type: 2}
     list: []
+    timer: 0
   markPrefab: {fileID: 2534846967646519379, guid: 9bd107df6089a1146b48969d8c4c0f42,
     type: 3}
+  curGenerateIndex: 0
 --- !u!1001 &5210144574178135385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1661,5 +1781,6 @@ SceneRoots:
   - {fileID: 1725566369}
   - {fileID: 2064838553}
   - {fileID: 832575519}
+  - {fileID: 604937277}
   - {fileID: 1648692957}
   - {fileID: 1390882568}

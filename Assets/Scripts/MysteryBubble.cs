@@ -44,7 +44,7 @@ public class MysteryBubble : MonoBehaviour, IInit
         {
             snake.ChangeSpeed(-deltaSpeed);//恢复
         });
-        UIManager.Instance.CreateCountTimer(snake.uiParent, "获得加速", duration, onEnd);
+        GameManager.Instance.CreateCountTimer(snake.uiParent, "获得加速", duration, onEnd);
     }
 
     private void Absorb(Snake snake)
@@ -55,6 +55,6 @@ public class MysteryBubble : MonoBehaviour, IInit
         {
             snake.ChangeRadius(-deltaRadius);//恢复
         });
-        UIManager.Instance.CreateCountTimer(snake.uiParent, "增加吸收范围", duration, onEnd);
+        GameManager.Instance.CreateCountTimer(snake.uiParent, "增加吸收范围", duration, onEnd);
     }
 }

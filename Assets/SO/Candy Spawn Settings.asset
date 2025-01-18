@@ -13,6 +13,13 @@ MonoBehaviour:
   m_Name: Candy Spawn Settings
   m_EditorClassIdentifier: 
   range: {x: 50, y: 25, z: 2}
-  intervalTime: 1
-  spawnCount: 2
+  infos:
+  - intervalTime: 10
+    spawnCount: 1
+  - intervalTime: 5
+    spawnCount: 1
+  - intervalTime: 1
+    spawnCount: 1
+  - intervalTime: 0.5
+    spawnCount: 1
   maxNum: 100

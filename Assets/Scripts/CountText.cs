@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class CountText : MonoBehaviour
     private float currentTime;
     private UnityEvent onEnd;
     private string title = "";
+    private List<CheckPoint> checkpoints = new List<CheckPoint>();
 
     public void Init(float time, UnityEvent onEnd)
     {
@@ -52,9 +54,46 @@ public class CountText : MonoBehaviour
         {
             countdownText.text = $"{(title == "" ? string.Empty : title + "：")}{seconds:D1}";
         }
-        else if (seconds < 10) 
+        else
         {
             countdownText.text = $"{(title == "" ? string.Empty : title + "：")}{minutes:D2}:{seconds:D2}"; // 格式化为 "mm:ss"
         }
+
+        if (checkpoints.Count > 0)
+        {
+            Check();
+        }
+    }
+
+    private void Check()
+    {
+        foreach (var point in checkpoints)
+        {
+            if (currentTime <= point.checkTime)
+            {
+                point.action.Invoke();
+                point.ifDone = true;
+            }
+        }
+        checkpoints.RemoveAll(item => item.ifDone);
+    }
+
+    public void AddCheckPoint(float checkTime, UnityAction action)
+    {
+        checkpoints.Add(new CheckPoint(checkTime, action));
+    }
+}
+
+public class CheckPoint
+{
+    public float checkTime;
+    public UnityAction action;
+    public bool ifDone;
+
+    public CheckPoint(float checkTime, UnityAction action)
+    {
+        this.checkTime = checkTime;
+        this.action = action;
+        ifDone = false;
     }
 }

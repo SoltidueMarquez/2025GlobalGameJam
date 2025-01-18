@@ -28,7 +28,9 @@ public class SnakeManager : MonoBehaviour
     [Header("重生")]
     [Tooltip("x,z,检测半径")]public Vector3 range;
     [Tooltip("重生时间")] public float waitTime;
-    
+
+    private List<Snake> snakeList = new List<Snake>();
+
     private void Start()
     {
         foreach (var setting in settings)
@@ -51,6 +53,9 @@ public class SnakeManager : MonoBehaviour
         
         var snake = tmp.GetComponentInChildren<Snake>();
         snake.Init(moveSpeed, speedRange, steerSpeed, setting, lateActiveTime, interval, radius, createBubbleRate);
+        
+        snakeList.RemoveAll(item => item == null);
+        snakeList.Add(snake);
     }
     
     public void Reborn(SnakeSet snake)
@@ -62,6 +67,16 @@ public class SnakeManager : MonoBehaviour
             CreateSnake(snake, position);  // 创建蛇
         });
         ToolManager.Instance.CreateMark(position, waitTime, onEnd);
+    }
+
+    public void AllSpeedUp(float deltaSpeed)//全体加速
+    {
+        moveSpeed += deltaSpeed;//增加基础速度
+        snakeList.RemoveAll(item => item == null);
+        foreach (var snake in snakeList)
+        {
+            snake.ChangeSpeed(deltaSpeed);
+        }
     }
 }
 
