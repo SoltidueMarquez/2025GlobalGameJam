@@ -230,12 +230,14 @@ public class Snake : MonoBehaviour
     {
         if (ifDie)
         {
+            snakeSettings.score = 0;
             scoreText.text = $"{selfName}:\n0";
             return;
         }
         else
         {
-            scoreText.text = $"{selfName}:\n{bodyParts.Count * 10}";
+            snakeSettings.score = bodyParts.Count * 10;
+            scoreText.text = $"{selfName}:\n{snakeSettings.score}";
         }
 
     }

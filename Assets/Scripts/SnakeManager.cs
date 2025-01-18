@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -77,6 +78,20 @@ public class SnakeManager : MonoBehaviour
             snake.ChangeSpeed(deltaSpeed);
         }
     }
+
+    public List<string> GetBigger()
+    {
+        var res = new List<string>();
+        var maxScore = settings.Select(set => set.score).Prepend(0).Max();
+        foreach (var set in settings)
+        {
+            if (set.score == maxScore)
+            {
+                res.Add(set.name);
+            }
+        }
+        return res;
+    }
 }
 
 [Serializable]
@@ -86,4 +101,5 @@ public struct SnakeSet
     public SnakeSettings settings;
     public Transform uiParent;
     public Text scoreText;
+    public int score;
 }

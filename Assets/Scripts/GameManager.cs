@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,11 +15,18 @@ public class GameManager : MonoBehaviour
     [Header("游戏倒计时")] public CountText countTime;
     public float startTime = 90f;
     public float deltaSpeed = 5f;
-    public List<float> rushCheckTimeList = new List<float>();
     public GameObject countTextPrefab;
 
+    [Header("冲刺")]
+    public List<float> rushCheckTimeList = new List<float>();
     public GameObject UITip;
     private UnityEvent onTimesUp = new UnityEvent();
+    
+    [Header("游戏结束页面")] 
+    public GameObject gameOverPanel;
+    public Text winText;
+    public Button backButton;
+    public Button restartButton;
     
     private void Start()
     {
@@ -33,10 +41,19 @@ public class GameManager : MonoBehaviour
         UITip.SetActive(false);
     }
 
+    #region 游戏结束
     private void GameOver()
     {
         Time.timeScale = 0;
+        InitGameOverPanel();
     }
+
+    private void InitGameOverPanel()
+    {
+        
+        gameOverPanel.SetActive(true);
+    }
+    #endregion
 
     public void CreateCountTimer(Transform parent, string title, float time, UnityEvent onEnd)
     {
@@ -44,17 +61,19 @@ public class GameManager : MonoBehaviour
         timer.Init(title, time, onEnd);
     }
 
+    #region 冲刺
     private void Rush()
     {
         SnakeManager.Instance.AllSpeedUp(deltaSpeed);
         ToolManager.Instance.UpdateGenerateInfoIndex();
-        StartCoroutine(ShowUI());
+        StartCoroutine(ShowPlayerMarkUI());
     }
 
-    private IEnumerator ShowUI()
+    private IEnumerator ShowPlayerMarkUI()
     {
         UITip.SetActive(true);
         yield return new WaitForSeconds(1);
         UITip.SetActive(false);
     }
+    #endregion
 }
