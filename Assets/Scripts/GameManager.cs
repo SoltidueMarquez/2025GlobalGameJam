@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
             countTime.AddCheckPoint(checkTime, Rush);
         }
         UITip.SetActive(false);
+        
+        
     }
 
     #region 游戏结束
@@ -50,7 +52,13 @@ public class GameManager : MonoBehaviour
 
     private void InitGameOverPanel()
     {
-        
+        var playerNames = "";
+        int maxScore = 0;
+        foreach (var playerName in SnakeManager.Instance.GetBigger(out maxScore))
+        {
+            playerNames += playerName + " ";
+        }
+        winText.text = $"{playerNames}的分数最高，\n为{maxScore}";
         gameOverPanel.SetActive(true);
     }
     #endregion
