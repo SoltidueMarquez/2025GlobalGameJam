@@ -41,7 +41,7 @@ public class BubbleBlower : MonoBehaviour
             if (bubble != null)
             {
                 // 让泡泡向目标方向移动
-                collider.transform.position += dir * (moveSpeed * Time.deltaTime);
+                collider.transform.parent.position += dir * (moveSpeed * Time.deltaTime);
             }
         }
     }

@@ -212,11 +212,11 @@ public class Snake : MonoBehaviour
             if (bubble != null)
             {
                 // 计算物体到脚本携带者的方向
-                Vector3 direction = (transform.position - collider.transform.position).normalized;
+                Vector3 direction = (transform.position - collider.transform.parent.position).normalized;
 
                 // 平滑移动物体向脚本携带者靠近
-                collider.transform.position = Vector3.MoveTowards(collider.transform.position, transform.position,
-                    (speedRange.y + 5) * Time.deltaTime);
+                collider.transform.parent.position = Vector3.MoveTowards(collider.transform.parent.position,
+                    transform.position, (speedRange.y + 5) * Time.deltaTime);
             }
         }
     }

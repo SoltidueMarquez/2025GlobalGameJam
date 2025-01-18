@@ -52,7 +52,7 @@ public class ToolManager : MonoBehaviour
                 return;
             }
             var tmp = Instantiate(tool.prefab, this.transform);
-            tmp.GetComponent<T>().Init();
+            tmp.GetComponentInChildren<T>().Init();
             tmp.transform.position = Utils.GetRandomPosition(tool.setting.range.x, tool.setting.range.y, tool.setting.range.z);
             tool.list.Add(tmp);
         }
@@ -61,7 +61,7 @@ public class ToolManager : MonoBehaviour
     private void CreateEatableTool<T>(EatableTools tool, Vector3 pos) where T : IInit
     {
         var tmp = Instantiate(tool.prefab, this.transform);
-        tmp.GetComponent<T>().Init();
+        tmp.GetComponentInChildren<T>().Init();
         tmp.transform.position = pos;
         tool.list.Add(tmp);
     }
