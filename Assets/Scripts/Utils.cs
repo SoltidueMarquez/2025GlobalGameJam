@@ -52,4 +52,15 @@ public static class Utils
         }
     }
 
+    public static bool CheckIfPlayer(Collision other, string excludeTag = "Player")
+    {
+        if (other.gameObject.CompareTag(excludeTag))
+        {
+            return false;
+        }
+        else
+        {
+            return other.gameObject.CompareTag("Player1")||other.gameObject.CompareTag("Player2")||other.gameObject.CompareTag("Player3");
+        }
+    }
 }

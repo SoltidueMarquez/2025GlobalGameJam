@@ -1,8 +1,13 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ToolManager : MonoBehaviour
 {
+    public static ToolManager Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
+    
     public GameObject candyPrefab;
     [Tooltip("x,z,检测半径")]public Vector3 range;
     public void CreateCandy()

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class SnakeBody : MonoBehaviour
@@ -16,5 +17,13 @@ public class SnakeBody : MonoBehaviour
     {
         yield return new WaitForSeconds(lateActiveTime);
         body.ifActive = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (Utils.CheckIfPlayer(other, this.tag))
+        {
+            other.GetComponent<Snake>().Die();
+        }
     }
 }
