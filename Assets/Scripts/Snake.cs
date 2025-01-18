@@ -208,7 +208,7 @@ public class Snake : MonoBehaviour
         foreach (var collider in colliders)
         {
             // 检查物体是否挂载了Bubble脚本
-            var bubble = collider.GetComponent<CandyBubble>();
+            var bubble = collider.GetComponent<IInit>();
             if (bubble != null)
             {
                 // 计算物体到脚本携带者的方向

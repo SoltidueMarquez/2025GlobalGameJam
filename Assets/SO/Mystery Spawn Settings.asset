@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Mystery Spawn Settings
   m_EditorClassIdentifier: 
   range: {x: 50, y: 25, z: 2}
-  intervalTime: 1
+  intervalTime: 5
   spawnCount: 1
-  maxNum: 10
+  maxNum: 3
