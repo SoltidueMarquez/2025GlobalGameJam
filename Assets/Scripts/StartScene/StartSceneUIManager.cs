@@ -96,6 +96,7 @@ public class StartSceneUIManager : MonoBehaviour
 
     private void SceneLoad(int playerNum)
     {
+        SceneLoadManager.Instance.playerNum = playerNum;
         SceneLoadManager.Instance.LoadScene("SampleScene");
     }
 
