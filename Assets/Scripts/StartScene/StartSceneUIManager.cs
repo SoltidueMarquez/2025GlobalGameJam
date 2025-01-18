@@ -52,7 +52,7 @@ public class StartSceneUIManager : MonoBehaviour
     private void ExitButtonClicked()
     {
         //停止游戏
-        Application.Quit();
+        SceneLoadManager.Instance.OnExitGame();
     }
 
     private void SingleButtonClicked()
@@ -88,7 +88,7 @@ public class StartSceneUIManager : MonoBehaviour
 
     private void SceneLoad(int playerNum)
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneLoadManager.Instance.LoadScene("SampleScene");
     }
 
 }
