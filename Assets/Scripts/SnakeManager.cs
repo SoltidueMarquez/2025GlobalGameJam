@@ -30,12 +30,15 @@ public class SnakeManager : MonoBehaviour
     [Tooltip("重生时间")] public float waitTime;
 
     private List<Snake> snakeList = new List<Snake>();
-
     private void Start()
     {
+        var num = 0;
         foreach (var setting in settings)
         {
             CreateSnake(setting);
+            setting.uiParent.gameObject.SetActive(true);
+            num++;
+            if (num >= SceneLoadManager.Instance.playerNum) break;
         }
     }
     
