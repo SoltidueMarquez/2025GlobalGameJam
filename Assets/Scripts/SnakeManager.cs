@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,7 +18,7 @@ public class SnakeManager : MonoBehaviour
     [Tooltip("身体间距")] public float interval = 1;
     
     public GameObject snakePrefab;
-    public List<SnakeSettings> settings = new List<SnakeSettings>();
+    public List<SnakeSet> settings = new List<SnakeSet>();
 
     [Header("泡泡相关")]
     [Tooltip("吸收半径")] public float radius = 10f;
@@ -36,14 +37,14 @@ public class SnakeManager : MonoBehaviour
     }
 
 
-    public void CreateSnake(SnakeSettings setting)
+    public void CreateSnake(SnakeSet setting)
     {
         var position = Utils.GetRandomPosition(range.x, range.y, range.z);
 
         CreateSnake(setting, position);
     }
 
-    public void CreateSnake(SnakeSettings setting, Vector3 position)
+    public void CreateSnake(SnakeSet setting, Vector3 position)
     {
         var tmp = Instantiate(snakePrefab, this.transform);
         tmp.transform.position = position;
@@ -52,7 +53,7 @@ public class SnakeManager : MonoBehaviour
         snake.Init(moveSpeed, speedRange, steerSpeed, setting, lateActiveTime, interval, radius, createBubbleRate);
     }
     
-    public void Reborn(SnakeSettings snake)
+    public void Reborn(SnakeSet snake)
     {
         var position = Utils.GetRandomPosition(range.x, range.y, range.z);
         var onEnd = new UnityEvent();
@@ -62,4 +63,11 @@ public class SnakeManager : MonoBehaviour
         });
         ToolManager.Instance.CreateMark(position, waitTime, onEnd);
     }
+}
+
+[Serializable]
+public struct SnakeSet
+{
+    public SnakeSettings settings;
+    public Transform uiParent;
 }

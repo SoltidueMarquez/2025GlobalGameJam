@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Snake : MonoBehaviour
 {
+    public Transform uiParent { get; private set; }
+    
     [Header("蛇头设置")] 
     [SerializeField] private float moveSpeed;
     private float steerSpeed;
     private float absorbRadius;
     private Vector2 speedRange;
-    private SnakeSettings snakeSettings;
+    private SnakeSet snakeSettings;
     private Quaternion targetRotation;  // 目标旋转
     private KeyCode verKey, horKey;
     private Rigidbody rb;
@@ -24,7 +26,7 @@ public class Snake : MonoBehaviour
     private int gap;
     private float createBubbleRate;
 
-    public void Init(float moveSpeed, Vector2 speedRange, float steerSpeed, SnakeSettings snakeSettings,
+    public void Init(float moveSpeed, Vector2 speedRange, float steerSpeed, SnakeSet snakeSettings,
         float lateActiveTime, float interval, float absorbRadius, float createBubbleRate)
     {
         this.moveSpeed = moveSpeed;
@@ -35,12 +37,13 @@ public class Snake : MonoBehaviour
         this.interval = interval;
         this.absorbRadius = absorbRadius;
         this.createBubbleRate = createBubbleRate;
+        this.uiParent = snakeSettings.uiParent;
         
         verKey = KeyCode.Space;
         horKey = KeyCode.Space;
         
         rb = GetComponent<Rigidbody>();
-        this.gameObject.tag = snakeSettings.playerTag;
+        this.gameObject.tag = snakeSettings.settings.playerTag;
         UpdateGap();
         lastBodyPart = transform;// 初始化头部位置
         headPositions.Add(transform.position); // 初始化位置列表，保存初始位置
@@ -70,17 +73,17 @@ public class Snake : MonoBehaviour
         // 根据按键设置方向
         Vector3 inputDirection = Vector3.zero;
 
-        if (Input.GetKeyDown(snakeSettings.up)) verKey = snakeSettings.up;
-        if (Input.GetKeyDown(snakeSettings.down)) verKey = snakeSettings.down;
+        if (Input.GetKeyDown(snakeSettings.settings.up)) verKey = snakeSettings.settings.up;
+        if (Input.GetKeyDown(snakeSettings.settings.down)) verKey = snakeSettings.settings.down;
         
-        if (Input.GetKeyDown(snakeSettings.left)) horKey = snakeSettings.left;
-        if (Input.GetKeyDown(snakeSettings.right)) horKey = snakeSettings.right;
+        if (Input.GetKeyDown(snakeSettings.settings.left)) horKey = snakeSettings.settings.left;
+        if (Input.GetKeyDown(snakeSettings.settings.right)) horKey = snakeSettings.settings.right;
         
-        if (Input.GetKey(snakeSettings.up) && verKey == snakeSettings.up) inputDirection.z = 1f;
-        if (Input.GetKey(snakeSettings.down) && verKey == snakeSettings.down) inputDirection.z = -1f;
+        if (Input.GetKey(snakeSettings.settings.up) && verKey == snakeSettings.settings.up) inputDirection.z = 1f;
+        if (Input.GetKey(snakeSettings.settings.down) && verKey == snakeSettings.settings.down) inputDirection.z = -1f;
 
-        if (Input.GetKey(snakeSettings.left) && horKey == snakeSettings.left) inputDirection.x = -1f;
-        if (Input.GetKey(snakeSettings.right) && horKey == snakeSettings.right) inputDirection.x = 1f;
+        if (Input.GetKey(snakeSettings.settings.left) && horKey == snakeSettings.settings.left) inputDirection.x = -1f;
+        if (Input.GetKey(snakeSettings.settings.right) && horKey == snakeSettings.settings.right) inputDirection.x = 1f;
 
         // 计算目标旋转
         if (inputDirection != Vector3.zero)
@@ -149,13 +152,13 @@ public class Snake : MonoBehaviour
     public void AddBodyPart()
     {
         // 生成新身体部分并设置其位置和旋转
-        var newBodyPart = Instantiate(snakeSettings.bodyPrefab, lastBodyPart.position, lastBodyPart.rotation);
+        var newBodyPart = Instantiate(snakeSettings.settings.bodyPrefab, lastBodyPart.position, lastBodyPart.rotation);
         // 更新最后一部分的引用
         lastBodyPart = newBodyPart.transform;
         lastBodyPart.SetParent(this.transform.parent);
         //初始化身体
         var newBody = newBodyPart.GetComponent<SnakeBody>();
-        newBody.Init(lateActiveTime, snakeSettings.playerTag);
+        newBody.Init(lateActiveTime, snakeSettings.settings.playerTag);
         bodyParts.Add(newBody);// 添加到身体列表
     }
 
@@ -175,7 +178,7 @@ public class Snake : MonoBehaviour
     //蛇头碰撞
     private void OnCollisionEnter(Collision collision)
     {
-        if (Utils.CheckIfPlayer(collision, snakeSettings.playerTag))
+        if (Utils.CheckIfPlayer(collision, snakeSettings.settings.playerTag))
         {
             collision.gameObject.GetComponent<Snake>().Die();
         }
@@ -206,6 +209,11 @@ public class Snake : MonoBehaviour
                 collider.transform.position = Vector3.MoveTowards(collider.transform.position, transform.position, speedRange.y * Time.deltaTime);
             }
         }
+    }
+
+    public void ChangeRadius(float delta)
+    {
+        absorbRadius += delta;
     }
 }
 

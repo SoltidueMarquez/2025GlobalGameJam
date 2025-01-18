@@ -12,7 +12,7 @@ public static class Utils
         for (int attempts = 0; attempts < maxTryCount; attempts++)
         {
             // 生成随机坐标
-            randomPosition = new Vector3(Random.Range(-xRange, xRange), 0, Random.Range(-zRange, zRange));
+            randomPosition = new Vector3(Random.Range(-xRange, xRange), 0.5f, Random.Range(-zRange, zRange));
 
             // 使用OverlapSphere检查当前位置的碰撞器
             Collider[] colliders = Physics.OverlapSphere(randomPosition, radius);
