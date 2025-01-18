@@ -1,13 +1,24 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class BubbleBlower : MonoBehaviour
 {
     public Vector3 dir;
     public float moveSpeed;
-    public Vector3 boxCenterOffset = Vector3.zero; // 方形区域相对脚本携带者的位置偏移
-    public Vector3 boxSize = new Vector3(5f, 2f, 5f); // 方形区域的尺寸（宽、高、深）
-    public Quaternion boxRotation = Quaternion.identity; // 方形区域的旋转
+    private Vector3 boxCenterOffset = Vector3.zero; // 方形区域相对脚本携带者的位置偏移
+    private Vector3 boxSize = Vector3.zero; // 方形区域的尺寸（宽、高、深）
+    private Quaternion boxRotation = Quaternion.identity; // 方形区域的旋转
 
+    private void Start()
+    {
+        Init();
+    }
+
+    public void Init()
+    {
+        boxSize = transform.localScale;
+    }
+    
     private void Update()
     {
         BlowBubble();
