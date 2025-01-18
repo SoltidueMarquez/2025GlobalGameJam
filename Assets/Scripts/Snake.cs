@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Snake : MonoBehaviour
 {
     public Transform uiParent { get; private set; }
-    
+    private Text scoreText;
+    private string selfName;
     [Header("蛇头设置")] 
     [SerializeField] private float moveSpeed;
     private float steerSpeed;
@@ -38,6 +40,8 @@ public class Snake : MonoBehaviour
         this.absorbRadius = absorbRadius;
         this.createBubbleRate = createBubbleRate;
         this.uiParent = snakeSettings.uiParent;
+        this.scoreText = snakeSettings.scoreText;
+        this.selfName = snakeSettings.name;
         
         verKey = KeyCode.Space;
         horKey = KeyCode.Space;
@@ -47,6 +51,7 @@ public class Snake : MonoBehaviour
         UpdateGap();
         lastBodyPart = transform;// 初始化头部位置
         headPositions.Add(transform.position); // 初始化位置列表，保存初始位置
+        UpdateScoreText(false);
     }
     
 
@@ -160,6 +165,9 @@ public class Snake : MonoBehaviour
         var newBody = newBodyPart.GetComponent<SnakeBody>();
         newBody.Init(lateActiveTime, snakeSettings.settings.playerTag);
         bodyParts.Add(newBody);// 添加到身体列表
+
+        //更新UI
+        UpdateScoreText(false);
     }
 
     /// <summary>
@@ -172,6 +180,7 @@ public class Snake : MonoBehaviour
         {
             ToolManager.Instance.CreateCandy(body.transform.position);
         }
+        UpdateScoreText(true);
         Destroy(gameObject.transform.parent.gameObject);
     }
 
@@ -215,6 +224,21 @@ public class Snake : MonoBehaviour
     public void ChangeRadius(float delta)
     {
         absorbRadius += delta;
+    }
+
+
+    private void UpdateScoreText(bool ifDie)
+    {
+        if (ifDie)
+        {
+            scoreText.text = $"{selfName}:\n0";
+            return;
+        }
+        else
+        {
+            scoreText.text = $"{selfName}:\n{bodyParts.Count * 10}";
+        }
+
     }
 }
 

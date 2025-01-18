@@ -1361,10 +1361,14 @@ MonoBehaviour:
   snakePrefab: {fileID: 2887134770777806820, guid: e22c274e7237ad24ba282be437615eeb,
     type: 3}
   settings:
-  - settings: {fileID: 11400000, guid: c617b029ccb01664bb72e60b05741c27, type: 2}
+  - name: "\u73A9\u5BB61"
+    settings: {fileID: 11400000, guid: c617b029ccb01664bb72e60b05741c27, type: 2}
     uiParent: {fileID: 752494231}
-  - settings: {fileID: 11400000, guid: e257b7948a590c04188c76a4bd3b5abb, type: 2}
+    scoreText: {fileID: 34088260}
+  - name: "\u73A9\u5BB62"
+    settings: {fileID: 11400000, guid: e257b7948a590c04188c76a4bd3b5abb, type: 2}
     uiParent: {fileID: 231248729}
+    scoreText: {fileID: 1883699549}
   radius: 3
   createBubbleRate: 0.33333334
   range: {x: 40, y: 15, z: 1}
@@ -1381,7 +1385,7 @@ GameObject:
   - component: {fileID: 1883699550}
   - component: {fileID: 1883699549}
   m_Layer: 5
-  m_Name: Player 1
+  m_Name: Player 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

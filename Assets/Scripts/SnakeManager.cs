@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class SnakeManager : MonoBehaviour
 {
@@ -35,8 +36,7 @@ public class SnakeManager : MonoBehaviour
             CreateSnake(setting);
         }
     }
-
-
+    
     public void CreateSnake(SnakeSet setting)
     {
         var position = Utils.GetRandomPosition(range.x, range.y, range.z);
@@ -68,6 +68,8 @@ public class SnakeManager : MonoBehaviour
 [Serializable]
 public struct SnakeSet
 {
+    public string name;
     public SnakeSettings settings;
     public Transform uiParent;
+    public Text scoreText;
 }
