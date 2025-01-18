@@ -96,7 +96,7 @@ public class SnakeManager : MonoBehaviour
 }
 
 [Serializable]
-public struct SnakeSet
+public class SnakeSet
 {
     public string name;
     public SnakeSettings settings;

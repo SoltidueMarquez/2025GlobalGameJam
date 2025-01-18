@@ -39,8 +39,6 @@ public class GameManager : MonoBehaviour
             countTime.AddCheckPoint(checkTime, Rush);
         }
         UITip.SetActive(false);
-        
-        
     }
 
     #region 游戏结束
@@ -52,6 +50,9 @@ public class GameManager : MonoBehaviour
 
     private void InitGameOverPanel()
     {
+        backButton.onClick.AddListener(SceneLoadManager.Instance.GoToStart);
+        restartButton.onClick.AddListener(SceneLoadManager.Instance.Reload);
+        
         var playerNames = "";
         int maxScore = 0;
         foreach (var playerName in SnakeManager.Instance.GetBigger(out maxScore))
