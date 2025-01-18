@@ -79,7 +79,7 @@ public class SnakeManager : MonoBehaviour
         }
     }
 
-    public List<string> GetBigger()
+    public List<string> GetBigger(out int maxNum)
     {
         var res = new List<string>();
         var maxScore = settings.Select(set => set.score).Prepend(0).Max();
@@ -90,12 +90,13 @@ public class SnakeManager : MonoBehaviour
                 res.Add(set.name);
             }
         }
+        maxNum = maxScore;
         return res;
     }
 }
 
 [Serializable]
-public struct SnakeSet
+public class SnakeSet
 {
     public string name;
     public SnakeSettings settings;

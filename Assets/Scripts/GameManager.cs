@@ -50,7 +50,16 @@ public class GameManager : MonoBehaviour
 
     private void InitGameOverPanel()
     {
+        backButton.onClick.AddListener(SceneLoadManager.Instance.GoToStart);
+        restartButton.onClick.AddListener(SceneLoadManager.Instance.Reload);
         
+        var playerNames = "";
+        int maxScore = 0;
+        foreach (var playerName in SnakeManager.Instance.GetBigger(out maxScore))
+        {
+            playerNames += playerName + " ";
+        }
+        winText.text = $"{playerNames}的分数最高，\n为{maxScore}";
         gameOverPanel.SetActive(true);
     }
     #endregion
