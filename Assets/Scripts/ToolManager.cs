@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
 
 public class ToolManager : MonoBehaviour
 {
@@ -9,18 +12,35 @@ public class ToolManager : MonoBehaviour
     }
     
     public GameObject candyPrefab;
-    [Tooltip("x,z,检测半径")]public Vector3 range;
-    public void CreateCandy()
+    public SpawnSettings candySetting;
+    private List<GameObject> candyList = new List<GameObject>();
+
+    public GameObject markPrefab;
+    
+    private void Start()
     {
-        Instantiate(candyPrefab, this.transform);
-        candyPrefab.transform.position = Utils.GetRandomPosition(range.x, range.y, range.z);
+        InvokeRepeating(nameof(CreateCandy), 0, candySetting.intervalTime);
+    }
+    
+    private void CreateCandy()
+    {
+        candyList.RemoveAll(item => item == null);
+        for (int i = 0; i < candySetting.spawnCount; i++)
+        {
+            if (candyList.Count >= candySetting.maxNum)
+            {
+                return;
+            }
+            var candy = Instantiate(candyPrefab, this.transform);
+            candy.transform.position = Utils.GetRandomPosition(candySetting.range.x, candySetting.range.y, candySetting.range.z);
+            candyList.Add(candy);
+        }
     }
 
-    public void Update()
+    public void CreateMark(Vector3 pos, float time, UnityEvent onEnd)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            CreateCandy();
-        }
+        var mark = Instantiate(markPrefab, this.transform);
+        mark.transform.position = pos;
+        mark.GetComponent<Mark>().Init(time, onEnd);
     }
 }

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SnakeManager : MonoBehaviour
 {
@@ -19,6 +19,7 @@ public class SnakeManager : MonoBehaviour
     public GameObject snakePrefab;
     public List<SnakeSettings> settings = new List<SnakeSettings>();
 
+    [Tooltip("x,z,检测半径")]public Vector3 range;
     [Tooltip("重生时间")] public float waitTime;
     
     private void Start()
@@ -32,9 +33,7 @@ public class SnakeManager : MonoBehaviour
 
     public void CreateSnake(SnakeSettings setting)
     {
-        var position = Utils.GetRandomPosition(ToolManager.Instance.range.x, 
-            ToolManager.Instance.range.y,
-            ToolManager.Instance.range.z);
+        var position = Utils.GetRandomPosition(range.x, range.y, range.z);
 
         CreateSnake(setting, position);
     }
@@ -50,16 +49,12 @@ public class SnakeManager : MonoBehaviour
     
     public void Reborn(SnakeSettings snake)
     {
-        var position = Utils.GetRandomPosition(ToolManager.Instance.range.x, 
-            ToolManager.Instance.range.y,
-            ToolManager.Instance.range.z);
-        
-        StartCoroutine(LateReborn(snake, position));
-    }
-
-    private IEnumerator LateReborn(SnakeSettings setting, Vector3 position)
-    {
-        yield return new WaitForSeconds(waitTime);
-        CreateSnake(setting, position);
+        var position = Utils.GetRandomPosition(range.x, range.y, range.z);
+        var onEnd = new UnityEvent();
+        onEnd.AddListener(() => 
+        {
+            CreateSnake(snake, position);  // 创建蛇
+        });
+        ToolManager.Instance.CreateMark(position, waitTime, onEnd);
     }
 }
