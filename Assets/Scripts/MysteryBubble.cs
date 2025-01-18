@@ -3,15 +3,12 @@ using UnityEngine.Events;
 
 public class MysteryBubble : MonoBehaviour, IInit
 {
-    private float duration = 8f;
-    private float deltaSpeed = 5f;
-    private float deltaRadius = 5f;
-    public void Init(float duration,float deltaSpeed,float deltaRadius)
+    public float duration = 8f;
+    public float deltaSpeed = 5f;
+    public float deltaRadius = 2f;
+    public void Init()
     {
         this.tag = "Tool";
-        this.duration = duration;
-        this.deltaSpeed = deltaSpeed;
-        this.deltaRadius = deltaRadius;
     }
     
     private void OnTriggerEnter(Collider other)

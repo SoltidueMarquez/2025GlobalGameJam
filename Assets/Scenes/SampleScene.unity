@@ -1473,7 +1473,6 @@ MonoBehaviour:
   moveSpeed: 5
   steerSpeed: 180
   speedRange: {x: 3, y: 20}
-  lateActiveTime: 0.1
   interval: 1
   snakePrefab: {fileID: 2887134770777806820, guid: e22c274e7237ad24ba282be437615eeb,
     type: 3}

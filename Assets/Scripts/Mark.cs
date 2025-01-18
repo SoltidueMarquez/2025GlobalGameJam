@@ -18,7 +18,6 @@ public class Mark : MonoBehaviour
         float angleX = Vector3.SignedAngle(Vector3.forward, directionToCamera, Vector3.right);
         // 应用旋转分量到Canvas
         canvas.transform.Rotate(angleX, 0, 0);
-
         
         onEnd.AddListener(SelfDestroy);
         countText.Init(time, onEnd);

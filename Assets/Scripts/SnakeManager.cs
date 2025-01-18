@@ -15,7 +15,6 @@ public class SnakeManager : MonoBehaviour
     public float moveSpeed = 5f;
     public float steerSpeed = 180f;
     public Vector2 speedRange = new Vector2(3, 20);
-    [Tooltip("激活时间")] public float lateActiveTime = 0.1f;
     [Tooltip("身体间距")] public float interval = 1;
     
     public GameObject snakePrefab;
@@ -52,7 +51,7 @@ public class SnakeManager : MonoBehaviour
         tmp.transform.position = position;
         
         var snake = tmp.GetComponentInChildren<Snake>();
-        snake.Init(moveSpeed, speedRange, steerSpeed, setting, lateActiveTime, interval, radius, createBubbleRate);
+        snake.Init(moveSpeed, speedRange, steerSpeed, setting, interval, radius, createBubbleRate);
         
         snakeList.RemoveAll(item => item == null);
         snakeList.Add(snake);
