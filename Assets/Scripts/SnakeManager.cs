@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,12 +12,18 @@ public class SnakeManager : MonoBehaviour
     
     public float moveSpeed = 5f;
     public float steerSpeed = 180f;
+    public Vector2 speedRange = new Vector2(3, 20);
     [Tooltip("激活时间")] public float lateActiveTime = 0.1f;
     [Tooltip("身体间距")] public float interval = 1;
     
     public GameObject snakePrefab;
     public List<SnakeSettings> settings = new List<SnakeSettings>();
 
+    [Header("泡泡相关")]
+    [Tooltip("吸收半径")] public float radius = 10f;
+    [Tooltip("爆出泡泡的概率"), Range(0, 1)] public float createBubbleRate;
+    
+    [Header("重生")]
     [Tooltip("x,z,检测半径")]public Vector3 range;
     [Tooltip("重生时间")] public float waitTime;
     
@@ -44,7 +49,7 @@ public class SnakeManager : MonoBehaviour
         tmp.transform.position = position;
         
         var snake = tmp.GetComponentInChildren<Snake>();
-        snake.Init(moveSpeed, steerSpeed, setting, lateActiveTime, interval);
+        snake.Init(moveSpeed, speedRange, steerSpeed, setting, lateActiveTime, interval, radius, createBubbleRate);
     }
     
     public void Reborn(SnakeSettings snake)

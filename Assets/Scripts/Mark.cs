@@ -8,7 +8,7 @@ public class Mark : MonoBehaviour
 
     public void Init(float time, UnityEvent onEnd)
     {
-        //canvas.transform.Rotate(0, 90, 0);
+        this.tag = "Tool";
         // 获取物体指向相机的方向向量
         Vector3 directionToCamera = Camera.main.transform.position - canvas.transform.position;
         // 将方向向量的Y和Z分量归零，仅计算X轴的旋转分量

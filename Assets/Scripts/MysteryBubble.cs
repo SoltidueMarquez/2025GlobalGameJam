@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
-public class CandyBubble : MonoBehaviour
+public class MysteryBubble : MonoBehaviour
 {
+    private float duration = 8f;
     public void Init()
     {
         this.tag = "Tool";
@@ -11,8 +12,23 @@ public class CandyBubble : MonoBehaviour
     {
         if (Utils.CheckIfPlayer(other))
         {
-            other.GetComponent<Snake>().AddBodyPart();
+            
             Destroy(gameObject);
         }
+    }
+
+    private void MakeEffect()
+    {
+        
+    }
+    
+    private void SpeedUp()
+    {
+        
+    }
+
+    private void Absorb()
+    {
+        
     }
 }

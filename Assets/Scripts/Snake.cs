@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Snake : MonoBehaviour
@@ -6,11 +7,13 @@ public class Snake : MonoBehaviour
     [Header("蛇头设置")] 
     [SerializeField] private float moveSpeed;
     private float steerSpeed;
+    private float absorbRadius;
+    private Vector2 speedRange;
     private SnakeSettings snakeSettings;
     private Quaternion targetRotation;  // 目标旋转
     private KeyCode verKey, horKey;
     private Rigidbody rb;
-    
+
     [Header("蛇身跟随设置")]
     private float lateActiveTime = 0.5f;//激活时间
     private float interval = 1;//身体间距
@@ -19,15 +22,19 @@ public class Snake : MonoBehaviour
     private List<Vector3> headPositions = new List<Vector3>(); // 蛇头位置列表
     private int positionListSize; // 控制位置列表的长度
     private int gap;
+    private float createBubbleRate;
 
-    private bool ifAlive = false;
-    public void Init(float moveSpeed, float steerSpeed, SnakeSettings snakeSettings, float lateActiveTime, float interval)
+    public void Init(float moveSpeed, Vector2 speedRange, float steerSpeed, SnakeSettings snakeSettings,
+        float lateActiveTime, float interval, float absorbRadius, float createBubbleRate)
     {
         this.moveSpeed = moveSpeed;
+        this.speedRange = speedRange;
         this.steerSpeed = steerSpeed;
         this.snakeSettings = snakeSettings;
         this.lateActiveTime = lateActiveTime;
         this.interval = interval;
+        this.absorbRadius = absorbRadius;
+        this.createBubbleRate = createBubbleRate;
         
         verKey = KeyCode.Space;
         horKey = KeyCode.Space;
@@ -37,18 +44,18 @@ public class Snake : MonoBehaviour
         UpdateGap();
         lastBodyPart = transform;// 初始化头部位置
         headPositions.Add(transform.position); // 初始化位置列表，保存初始位置
-        ifAlive = true;
     }
     
 
     #region 移动控制
     private void Update()
     {
-        if (!ifAlive) return;
         // 头部移动
         MoveHead();
         // 身体部分根据位置列表更新
         MoveBodyParts();
+        //吸收泡泡
+        AbsorbBubble();
     }
     
     /// <summary>
@@ -56,6 +63,7 @@ public class Snake : MonoBehaviour
     /// </summary>
     private void MoveHead()
     {
+        moveSpeed = Mathf.Clamp(moveSpeed, speedRange.x, speedRange.y);//限制速度
         Vector3 moveDirection = transform.forward * (moveSpeed * Time.deltaTime);
         rb.MovePosition(rb.position + moveDirection);
 
@@ -157,6 +165,10 @@ public class Snake : MonoBehaviour
     public void Die()
     {
         SnakeManager.Instance.Reborn(this.snakeSettings);
+        foreach (var body in bodyParts.Where(body => Random.Range(0f, 1f) < createBubbleRate))
+        {
+            ToolManager.Instance.CreateCandy(body.transform.position);
+        }
         Destroy(gameObject.transform.parent.gameObject);
     }
 
@@ -166,6 +178,33 @@ public class Snake : MonoBehaviour
         if (Utils.CheckIfPlayer(collision, snakeSettings.playerTag))
         {
             collision.gameObject.GetComponent<Snake>().Die();
+        }
+    }
+
+    //改变速度
+    public void ChangeSpeed(float delta)
+    {
+        moveSpeed += delta;
+    }
+    
+    //吸收泡泡
+    private void AbsorbBubble()
+    {
+        // 获取所有在指定半径内的物体
+        Collider[] colliders = Physics.OverlapSphere(transform.position, absorbRadius);
+
+        foreach (var collider in colliders)
+        {
+            // 检查物体是否挂载了Bubble脚本
+            var bubble = collider.GetComponent<CandyBubble>();
+            if (bubble != null)
+            {
+                // 计算物体到脚本携带者的方向
+                Vector3 direction = (transform.position - collider.transform.position).normalized;
+
+                // 平滑移动物体向脚本携带者靠近
+                collider.transform.position = Vector3.MoveTowards(collider.transform.position, transform.position, speedRange.y * Time.deltaTime);
+            }
         }
     }
 }

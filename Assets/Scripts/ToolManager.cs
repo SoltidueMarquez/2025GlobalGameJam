@@ -32,9 +32,18 @@ public class ToolManager : MonoBehaviour
                 return;
             }
             var candy = Instantiate(candyPrefab, this.transform);
+            candy.GetComponent<CandyBubble>().Init();
             candy.transform.position = Utils.GetRandomPosition(candySetting.range.x, candySetting.range.y, candySetting.range.z);
             candyList.Add(candy);
         }
+    }
+
+    public void CreateCandy(Vector3 pos)
+    {
+        var candy = Instantiate(candyPrefab, this.transform);
+        candy.GetComponent<CandyBubble>().Init();
+        candy.transform.position = pos;
+        candyList.Add(candy);
     }
 
     public void CreateMark(Vector3 pos, float time, UnityEvent onEnd)
