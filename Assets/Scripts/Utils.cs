@@ -40,6 +40,16 @@ public static class Utils
         return randomPosition;
     }
 
-
+    public static bool CheckIfPlayer(Collider other, string excludeTag = "Player")
+    {
+        if (other.CompareTag(excludeTag))
+        {
+            return false;
+        }
+        else
+        {
+            return other.CompareTag("Player1")||other.CompareTag("Player2")||other.CompareTag("Player3");
+        }
+    }
 
 }

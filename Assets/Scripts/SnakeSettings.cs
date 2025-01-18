@@ -9,4 +9,5 @@ public class SnakeSettings : ScriptableObject
     public KeyCode right;
     
     public GameObject bodyPrefab;
+    public string playerTag;
 }

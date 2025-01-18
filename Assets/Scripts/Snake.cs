@@ -7,8 +7,8 @@ public class Snake : MonoBehaviour
     [Header("蛇头设置")]
     public float moveSpeed = 5f;
     public float steerSpeed = 180f;
+    public SnakeSettings snakeSettings;
     private Quaternion targetRotation;  // 目标旋转
-    [FormerlySerializedAs("keys")] public SnakeSettings snakeSettings;
     private KeyCode verKey, horKey;
     
     private Rigidbody rb;
@@ -28,6 +28,7 @@ public class Snake : MonoBehaviour
         horKey = KeyCode.Space;
         
         rb = GetComponent<Rigidbody>();
+        this.gameObject.tag = snakeSettings.playerTag;
         UpdateGap();
         lastBodyPart = transform;// 初始化头部位置
         headPositions.Add(transform.position); // 初始化位置列表，保存初始位置
@@ -139,7 +140,7 @@ public class Snake : MonoBehaviour
         lastBodyPart.SetParent(this.transform.parent);
         //初始化身体
         var newBody = newBodyPart.GetComponent<SnakeBody>();
-        newBody.Init(lateActiveTime);
+        newBody.Init(lateActiveTime, snakeSettings.playerTag);
         bodyParts.Add(newBody);// 添加到身体列表
     }
 }
