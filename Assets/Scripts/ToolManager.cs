@@ -40,7 +40,7 @@ public class ToolManager : MonoBehaviour
     public void CreateMark(Vector3 pos, float time, UnityEvent onEnd)
     {
         var mark = Instantiate(markPrefab, this.transform);
-        mark.transform.position = pos;
+        mark.transform.position = pos + new Vector3(0, 2, 0);
         mark.GetComponent<Mark>().Init(time, onEnd);
     }
 }

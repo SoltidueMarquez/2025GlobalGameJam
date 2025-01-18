@@ -36,11 +36,22 @@ public class CountText : MonoBehaviour
     }
     
     // 更新Text显示为 "分:秒" 格式
-    public void UpdateCountdownText()
+    private void UpdateCountdownText()
     {
         var minutes = Mathf.FloorToInt(currentTime / 60); // 获取分钟部分
         var seconds = Mathf.FloorToInt(currentTime % 60); // 获取秒数部分
 
-        countdownText.text = $"{minutes:D2}:{seconds:D2}"; // 格式化为 "mm:ss"
+        if (minutes > 0)
+        {
+            countdownText.text = $"{minutes:D2}:{seconds:D2}"; // 格式化为 "mm:ss"
+        }
+        else if (seconds >= 10) 
+        {
+            countdownText.text = $"{seconds:D2}";
+        }
+        else
+        {
+            countdownText.text = $"{seconds:D1}";
+        }
     }
 }
