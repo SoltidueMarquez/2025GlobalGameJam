@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SnakeBody : MonoBehaviour
 {
-    public bool ifActive { get; private set; }
-
-    public void Init(float lateActiveTime, string tag)
+    public void Init(string tag)
     {
-        this.ifActive = false;
-        StartCoroutine(ActivateBody(this, lateActiveTime)); // 延时激活
         this.tag = tag;
-    }
-    
-    private IEnumerator ActivateBody(SnakeBody body, float lateActiveTime)
-    {
-        yield return new WaitForSeconds(lateActiveTime);
-        body.ifActive = true;
     }
 
     private void OnTriggerEnter(Collider other)

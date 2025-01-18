@@ -8,6 +8,8 @@ public class BubbleBlower : MonoBehaviour
     private Vector3 boxSize = Vector3.zero; // 方形区域的尺寸（宽、高、深）
     private Quaternion boxRotation = Quaternion.identity; // 方形区域的旋转
 
+    
+    
     private void Start()
     {
         Init();

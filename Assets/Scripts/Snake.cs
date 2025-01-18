@@ -8,6 +8,7 @@ public class Snake : MonoBehaviour
     public Transform uiParent { get; private set; }
     private Text scoreText;
     private string selfName;
+    public PlayerMark mark;
     [Header("蛇头设置")] 
     [SerializeField] private float moveSpeed;
     private float steerSpeed;
@@ -19,7 +20,6 @@ public class Snake : MonoBehaviour
     private Rigidbody rb;
 
     [Header("蛇身跟随设置")]
-    private float lateActiveTime = 0.5f;//激活时间
     private float interval = 1;//身体间距
     private List<SnakeBody> bodyParts = new List<SnakeBody>(); // 身体部分列表
     private Transform lastBodyPart; // 最后一部分，便于定位新生成位置
@@ -29,19 +29,19 @@ public class Snake : MonoBehaviour
     private float createBubbleRate;
 
     public void Init(float moveSpeed, Vector2 speedRange, float steerSpeed, SnakeSet snakeSettings,
-        float lateActiveTime, float interval, float absorbRadius, float createBubbleRate)
+        float interval, float absorbRadius, float createBubbleRate)
     {
         this.moveSpeed = moveSpeed;
         this.speedRange = speedRange;
         this.steerSpeed = steerSpeed;
         this.snakeSettings = snakeSettings;
-        this.lateActiveTime = lateActiveTime;
         this.interval = interval;
         this.absorbRadius = absorbRadius;
         this.createBubbleRate = createBubbleRate;
         this.uiParent = snakeSettings.uiParent;
         this.scoreText = snakeSettings.scoreText;
         this.selfName = snakeSettings.name;
+        mark.Init(selfName);
         
         verKey = KeyCode.Space;
         horKey = KeyCode.Space;
@@ -131,7 +131,6 @@ public class Snake : MonoBehaviour
         for (int i = 0; i < bodyParts.Count; i++)
         {
             var body = bodyParts[i];
-            if (!body.ifActive) continue;
 
             // 获取当前位置列表中的相应位置
             Vector3 targetPosition = headPositions[Mathf.Min(i * gap, headPositions.Count - 1)];
@@ -163,7 +162,7 @@ public class Snake : MonoBehaviour
         lastBodyPart.SetParent(this.transform.parent);
         //初始化身体
         var newBody = newBodyPart.GetComponent<SnakeBody>();
-        newBody.Init(lateActiveTime, snakeSettings.settings.playerTag);
+        newBody.Init(snakeSettings.settings.playerTag);
         bodyParts.Add(newBody);// 添加到身体列表
 
         //更新UI
@@ -175,11 +174,11 @@ public class Snake : MonoBehaviour
     /// </summary>
     public void Die()
     {
-        SnakeManager.Instance.Reborn(this.snakeSettings);
         foreach (var body in bodyParts.Where(body => Random.Range(0f, 1f) < createBubbleRate))
         {
             ToolManager.Instance.CreateCandy(body.transform.position);
         }
+        SnakeManager.Instance.Reborn(this.snakeSettings);
         UpdateScoreText(true);
         Destroy(gameObject.transform.parent.gameObject);
     }
@@ -231,12 +230,14 @@ public class Snake : MonoBehaviour
     {
         if (ifDie)
         {
+            snakeSettings.score = 0;
             scoreText.text = $"{selfName}:\n0";
             return;
         }
         else
         {
-            scoreText.text = $"{selfName}:\n{bodyParts.Count * 10}";
+            snakeSettings.score = bodyParts.Count * 10;
+            scoreText.text = $"{selfName}:\n{snakeSettings.score}";
         }
 
     }

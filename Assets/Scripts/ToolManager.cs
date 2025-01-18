@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class ToolManager : MonoBehaviour
 {
@@ -13,21 +14,38 @@ public class ToolManager : MonoBehaviour
 
     public EatableTools candy;
     public EatableTools mystery;
-
     public GameObject markPrefab;
     
-    
+    [HideInInspector] public int curGenerateIndex;
+
     private void Start()
     {
-        InvokeRepeating(nameof(CreateCandy), 0, candy.setting.intervalTime);
-        InvokeRepeating(nameof(CreateMystery), 0, mystery.setting.intervalTime);
+        curGenerateIndex = 0;
+    }
+
+    private void Update()
+    {
+        candy.timer += Time.deltaTime;
+        mystery.timer += Time.deltaTime;
+
+        if (candy.timer >= candy.setting.infos[curGenerateIndex].intervalTime)
+        {
+            CreateCandy();
+            candy.timer = 0f;  // 重置计时器
+        }
+
+        if (mystery.timer >= mystery.setting.infos[curGenerateIndex].intervalTime)
+        {
+            CreateMystery();
+            mystery.timer = 0f;  // 重置计时器
+        }
     }
 
     #region 工具封装
     private void CreateEatableTool<T>(EatableTools tool) where T : IInit
     {
         tool.list.RemoveAll(item => item == null);
-        for (int i = 0; i < tool.setting.spawnCount; i++)
+        for (int i = 0; i < tool.setting.infos[curGenerateIndex].spawnCount; i++)
         {
             if (tool.list.Count >= tool.setting.maxNum)
             {
@@ -81,6 +99,11 @@ public class ToolManager : MonoBehaviour
         mark.GetComponent<Mark>().Init(time, onEnd);
     }
     #endregion
+
+    public void UpdateGenerateInfoIndex()
+    {
+        curGenerateIndex = Mathf.Clamp(curGenerateIndex + 1, 0, 3);
+    }
 }
 
 [Serializable]
@@ -89,6 +112,7 @@ public class EatableTools
     public GameObject prefab;
     public SpawnSettings setting;
     public List<GameObject> list = new List<GameObject>();
+    [HideInInspector] public float timer = 0f;
 }
 
 public interface IInit

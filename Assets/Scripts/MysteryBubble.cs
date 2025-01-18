@@ -3,15 +3,12 @@ using UnityEngine.Events;
 
 public class MysteryBubble : MonoBehaviour, IInit
 {
-    private float duration = 8f;
-    private float deltaSpeed = 5f;
-    private float deltaRadius = 5f;
-    public void Init(float duration,float deltaSpeed,float deltaRadius)
+    public float duration = 8f;
+    public float deltaSpeed = 5f;
+    public float deltaRadius = 2f;
+    public void Init()
     {
         this.tag = "Tool";
-        this.duration = duration;
-        this.deltaSpeed = deltaSpeed;
-        this.deltaRadius = deltaRadius;
     }
     
     private void OnTriggerEnter(Collider other)
@@ -44,7 +41,7 @@ public class MysteryBubble : MonoBehaviour, IInit
         {
             snake.ChangeSpeed(-deltaSpeed);//恢复
         });
-        UIManager.Instance.CreateCountTimer(snake.uiParent, "获得加速", duration, onEnd);
+        GameManager.Instance.CreateCountTimer(snake.uiParent, "获得加速", duration, onEnd);
     }
 
     private void Absorb(Snake snake)
@@ -55,6 +52,6 @@ public class MysteryBubble : MonoBehaviour, IInit
         {
             snake.ChangeRadius(-deltaRadius);//恢复
         });
-        UIManager.Instance.CreateCountTimer(snake.uiParent, "增加吸收范围", duration, onEnd);
+        GameManager.Instance.CreateCountTimer(snake.uiParent, "增加吸收范围", duration, onEnd);
     }
 }
