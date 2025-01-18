@@ -19,6 +19,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
     //AudioMixer音量设置
     public void SetMasterVolume(float value)
     {
+        PlayerPrefs.SetFloat("master",value);
         var tmp = value * 40 - 40;
         audioMixer.SetFloat("vMaster", tmp);
     }
@@ -33,6 +34,12 @@ public class AudioManager : PersistentSingleton<AudioManager>
         PlayerPrefs.SetFloat("sound",value);
         var tmp = value * 40 - 40;
         audioMixer.SetFloat("vSound", tmp);
+    }
+    public void UpdateVolume()
+    {
+        SetMasterVolume(PlayerPrefs.GetFloat("master", 0.5f));
+        SetMusicVolume(PlayerPrefs.GetFloat("music", 0.5f));
+        SetSfxVolume(PlayerPrefs.GetFloat("sound", 0.5f));
     }
     #endregion
 

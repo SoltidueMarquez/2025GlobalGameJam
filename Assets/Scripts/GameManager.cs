@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour
     public Text winText;
     public Button backButton;
     public Button restartButton;
+
+    public PauseUI pauseUI;
     
     private void Start()
     {
@@ -39,6 +42,14 @@ public class GameManager : MonoBehaviour
             countTime.AddCheckPoint(checkTime, Rush);
         }
         UITip.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pauseUI.Pause();
+        }
     }
 
     #region 游戏结束
@@ -64,6 +75,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    //创建计时器
     public void CreateCountTimer(Transform parent, string title, float time, UnityEvent onEnd)
     {
         var timer = Instantiate(countTextPrefab, parent).GetComponent<CountText>();
