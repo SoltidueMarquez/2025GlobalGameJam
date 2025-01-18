@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CandyBubble : MonoBehaviour
+public class CandyBubble : MonoBehaviour, IInit
 {
     public void Init()
     {

@@ -206,7 +206,8 @@ public class Snake : MonoBehaviour
                 Vector3 direction = (transform.position - collider.transform.position).normalized;
 
                 // 平滑移动物体向脚本携带者靠近
-                collider.transform.position = Vector3.MoveTowards(collider.transform.position, transform.position, speedRange.y * Time.deltaTime);
+                collider.transform.position = Vector3.MoveTowards(collider.transform.position, transform.position,
+                    (speedRange.y + 5) * Time.deltaTime);
             }
         }
     }

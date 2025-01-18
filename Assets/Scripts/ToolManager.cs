@@ -10,46 +10,88 @@ public class ToolManager : MonoBehaviour
     {
         Instance = this;
     }
-    
-    public GameObject candyPrefab;
-    public SpawnSettings candySetting;
-    private List<GameObject> candyList = new List<GameObject>();
+
+    public EatableTools candy;
+    public EatableTools mystery;
 
     public GameObject markPrefab;
     
+    
     private void Start()
     {
-        InvokeRepeating(nameof(CreateCandy), 0, candySetting.intervalTime);
+        InvokeRepeating(nameof(CreateCandy), 0, candy.setting.intervalTime);
+        InvokeRepeating(nameof(CreateMystery), 0, mystery.setting.intervalTime);
     }
-    
-    private void CreateCandy()
+
+    #region 工具封装
+    private void CreateEatableTool<T>(EatableTools tool) where T : IInit
     {
-        candyList.RemoveAll(item => item == null);
-        for (int i = 0; i < candySetting.spawnCount; i++)
+        tool.list.RemoveAll(item => item == null);
+        for (int i = 0; i < tool.setting.spawnCount; i++)
         {
-            if (candyList.Count >= candySetting.maxNum)
+            if (tool.list.Count >= tool.setting.maxNum)
             {
                 return;
             }
-            var candy = Instantiate(candyPrefab, this.transform);
-            candy.GetComponent<CandyBubble>().Init();
-            candy.transform.position = Utils.GetRandomPosition(candySetting.range.x, candySetting.range.y, candySetting.range.z);
-            candyList.Add(candy);
+            var tmp = Instantiate(tool.prefab, this.transform);
+            tmp.GetComponent<T>().Init();
+            tmp.transform.position = Utils.GetRandomPosition(tool.setting.range.x, tool.setting.range.y, tool.setting.range.z);
+            tool.list.Add(tmp);
         }
     }
 
+    private void CreateEatableTool<T>(EatableTools tool, Vector3 pos) where T : IInit
+    {
+        var tmp = Instantiate(tool.prefab, this.transform);
+        tmp.GetComponent<T>().Init();
+        tmp.transform.position = pos;
+        tool.list.Add(tmp);
+    }
+    
+    #endregion
+
+    #region 创建增长气泡
+    private void CreateCandy()
+    {
+        CreateEatableTool<CandyBubble>(candy);
+    }
     public void CreateCandy(Vector3 pos)
     {
-        var candy = Instantiate(candyPrefab, this.transform);
-        candy.GetComponent<CandyBubble>().Init();
-        candy.transform.position = pos;
-        candyList.Add(candy);
+        CreateEatableTool<CandyBubble>(candy, pos);
+    }
+    #endregion
+
+    #region 神秘气泡
+    private void CreateMystery()
+    {
+        CreateEatableTool<MysteryBubble>(mystery);
+    }
+    public void CreateMystery(Vector3 pos)
+    {
+        CreateEatableTool<MysteryBubble>(mystery, pos);
     }
 
+    #endregion
+
+    #region 复活标记
     public void CreateMark(Vector3 pos, float time, UnityEvent onEnd)
     {
         var mark = Instantiate(markPrefab, this.transform);
         mark.transform.position = pos + new Vector3(0, 2, 0);
         mark.GetComponent<Mark>().Init(time, onEnd);
     }
+    #endregion
+}
+
+[Serializable]
+public class EatableTools
+{
+    public GameObject prefab;
+    public SpawnSettings setting;
+    public List<GameObject> list = new List<GameObject>();
+}
+
+public interface IInit
+{
+    public virtual void Init() { }
 }

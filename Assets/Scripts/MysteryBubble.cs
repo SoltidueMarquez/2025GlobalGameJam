@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class MysteryBubble : MonoBehaviour
+public class MysteryBubble : MonoBehaviour, IInit
 {
     private float duration = 8f;
     private float deltaSpeed = 5f;
