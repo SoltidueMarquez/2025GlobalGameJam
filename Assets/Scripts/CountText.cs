@@ -9,7 +9,7 @@ public class CountText : MonoBehaviour
     private float startTime;
     private float currentTime;
     private UnityEvent onEnd;
-    private string name = "";
+    private string title = "";
 
     public void Init(float time, UnityEvent onEnd)
     {
@@ -22,7 +22,7 @@ public class CountText : MonoBehaviour
 
     public void Init(string txt, float time, UnityEvent onEnd)
     {
-        name = txt;
+        title = txt;
         Init(time, onEnd);
     }
     
@@ -48,13 +48,13 @@ public class CountText : MonoBehaviour
         var minutes = Mathf.FloorToInt(currentTime / 60); // 获取分钟部分
         var seconds = Mathf.FloorToInt(currentTime % 60); // 获取秒数部分
 
-        if (minutes > 0)
+        if (minutes <= 0 && seconds < 10) 
         {
-            countdownText.text = $"{(name == "" ? string.Empty : name + "：")}{minutes:D2}:{seconds:D2}"; // 格式化为 "mm:ss"
+            countdownText.text = $"{(title == "" ? string.Empty : title + "：")}{seconds:D1}";
         }
         else if (seconds < 10) 
         {
-            countdownText.text = $"{(name == "" ? string.Empty : name + "：")}{seconds:D1}";
+            countdownText.text = $"{(title == "" ? string.Empty : title + "：")}{minutes:D2}:{seconds:D2}"; // 格式化为 "mm:ss"
         }
     }
 }
