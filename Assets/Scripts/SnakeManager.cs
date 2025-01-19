@@ -72,7 +72,7 @@ public class SnakeManager : MonoBehaviour
             CreateSnake(snake, position);  // 创建蛇
             snake.ifReborn = false;
         });
-        ToolManager.Instance.CreateMark(position, waitTime, onEnd);
+        ToolManager.Instance.CreateMark(position, waitTime, onEnd, snake.settings.color);
     }
 
     public void AllSpeedUp(float deltaSpeed)//全体加速
@@ -109,5 +109,5 @@ public class SnakeSet
     public Transform uiParent;
     public Text scoreText;
     public int score;
-    public bool ifReborn = false;
+    [HideInInspector] public bool ifReborn = false;
 }
