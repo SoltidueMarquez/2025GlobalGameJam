@@ -18,6 +18,7 @@ public class Snake : MonoBehaviour
     private Quaternion targetRotation;  // 目标旋转
     private KeyCode verKey, horKey;
     private Rigidbody rb;
+    public Renderer bodyRender;
 
     [Header("蛇身跟随设置")]
     private float interval = 1;//身体间距
@@ -42,6 +43,15 @@ public class Snake : MonoBehaviour
         this.scoreText = snakeSettings.scoreText;
         this.selfName = snakeSettings.name;
         mark.Init(selfName);
+        
+        var materials = bodyRender.materials;
+        Debug.Log(materials);
+        if (materials is { Length: > 1 })
+        {
+            Debug.Log("111");
+            var bodyMaterial = materials[1];
+            bodyMaterial.color = snakeSettings.settings.color;
+        }
         
         verKey = KeyCode.Space;
         horKey = KeyCode.Space;
@@ -96,7 +106,8 @@ public class Snake : MonoBehaviour
             targetRotation = Quaternion.LookRotation(inputDirection);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, steerSpeed * Time.deltaTime);
         }
-
+        
+        
     }
     #endregion
     

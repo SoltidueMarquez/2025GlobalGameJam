@@ -111,11 +111,11 @@ public class ToolManager : MonoBehaviour
     #endregion
     
     #region 复活标记
-    public void CreateMark(Vector3 pos, float time, UnityEvent onEnd)
+    public void CreateMark(Vector3 pos, float time, UnityEvent onEnd, Color color)
     {
         var mark = Instantiate(markPrefab, this.transform);
         mark.transform.position = pos + new Vector3(0, 2, 0);
-        mark.GetComponent<Mark>().Init(time, onEnd);
+        mark.GetComponent<Mark>().Init(time, onEnd, color);
     }
     #endregion
 
