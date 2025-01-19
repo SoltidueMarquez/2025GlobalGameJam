@@ -1,22 +1,21 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-public class ButtonPointerEnter : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+namespace StartScene
 {
-    public int num = 0;
-    public GameObject buttonTextGroup;
+    public class ButtonPointerEnter : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+    {
+        public int num = 0;
+        public GameObject buttonTextGroup;
     
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        buttonTextGroup.SetActive(true);
-    }
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            buttonTextGroup.SetActive(true);
+        }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        buttonTextGroup.SetActive(false);
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            buttonTextGroup.SetActive(false);
+        }
     }
 }

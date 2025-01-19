@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoadManager : PersistentSingleton<SceneLoadManager>
 {
     public string startSceneName = "StartScene";
+    public string gameSceneName = "GameScene";
     public int playerNum = 2;
     
     public void LoadScene(string sceneName)
@@ -15,6 +16,10 @@ public class SceneLoadManager : PersistentSingleton<SceneLoadManager>
     public void GoToStart()
     {
         LoadScene(startSceneName);
+    }
+    public void GoToGame()
+    {
+        LoadScene(gameSceneName);
     }
 
     public void Reload()
