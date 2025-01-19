@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2876423228514323791
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -20,14 +7,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Candy1
-  m_Shader: {fileID: -6465566751694194690, guid: 4974f8c6dea930d4d9a6f7461ad8996d,
+  m_Name: star3
+  m_Shader: {fileID: -6465566751694194690, guid: 91d3e5b6696f1824ea5f4dc953db2873,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -51,13 +38,30 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AddAlpha: 0.2
-    - _BlendOpacity: 1
-    - _Blend_Sharpness: 1
-    - _DivideColor: 1
-    - _Fresnel_Power: 1.26
-    - _NoiseSubstraction: 0.68
+    - _Alpha: 0.54
+    - _ColorTintBlend: 0.5
+    - _HueBlend: 1
+    - _HueFollof: 1
+    - _HueInt: 1
+    - _HueTile: 1
+    - _Metalic: 0.1
     - _QueueControl: 0
     - _QueueOffset: 0
-    m_Colors: []
+    - _Smooth: 0.5
+    m_Colors:
+    - _BaseColor: {r: 1, g: 0.90090233, b: 0, a: 0}
+    - _HueColor: {r: 0.13536185, g: 0, b: 0.94509804, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &7580117577698684793
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
