@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7166989772417217678}
   - component: {fileID: 6970729479963913722}
   - component: {fileID: 6857109329649629877}
+  - component: {fileID: 3561940605774900098}
   m_Layer: 0
   m_Name: Star (2)
   m_TagString: Untagged
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a3bd1a5fd3d44094ba4eacdda71ff90c, type: 2}
+  - {fileID: 2100000, guid: 53b06c7b37c26254ab47b82706183082, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,6 +84,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &3561940605774900098
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141211812188652702}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4f46efc3248461147a20dad92c7e841d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5679956714897471028
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,6 +271,7 @@ GameObject:
   - component: {fileID: 9025792676813856337}
   - component: {fileID: 4155021327211445986}
   - component: {fileID: 8018649043299827774}
+  - component: {fileID: 1204018242691802778}
   m_Layer: 0
   m_Name: Star (3)
   m_TagString: Untagged
@@ -299,7 +322,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a3bd1a5fd3d44094ba4eacdda71ff90c, type: 2}
+  - {fileID: 2100000, guid: 36b5fe043b35b704f8b4bfd5dfa81bcb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -321,6 +344,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &1204018242691802778
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6589303310048196251}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7e22c69d4ca2ba84eb96a5a7efba69c3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7444374017845690621
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,6 +376,7 @@ GameObject:
   - component: {fileID: 2271250820167170356}
   - component: {fileID: 4746796860543607473}
   - component: {fileID: 7116482604017626892}
+  - component: {fileID: 607939890974089792}
   m_Layer: 0
   m_Name: Star
   m_TagString: Untagged
@@ -347,13 +392,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7444374017845690621}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.32868457, y: -0.36533841, z: -0.13968757, w: 0.8596404}
+  m_LocalRotation: {x: 0.33223155, y: -0.33359706, z: -0.120922334, w: 0.87390673}
   m_LocalPosition: {x: 0.0038, y: 0.0084, z: 0.0027}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5008919610945643806}
-  m_LocalEulerAnglesHint: {x: 27.583, y: -54.318, z: -32.814}
+  m_LocalEulerAnglesHint: {x: 30, y: -50, z: -30}
 --- !u!33 &4746796860543607473
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -382,7 +427,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a3bd1a5fd3d44094ba4eacdda71ff90c, type: 2}
+  - {fileID: 2100000, guid: c1438cf77ae8fcc45870a70f2323a917, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -404,6 +449,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &607939890974089792
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7444374017845690621}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3e2dcc5762c76664b9718d5191855c1d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &9188080464718961259
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,6 +481,7 @@ GameObject:
   - component: {fileID: 9180811185071903759}
   - component: {fileID: 1709454249153951691}
   - component: {fileID: 1806648489922050747}
+  - component: {fileID: 8733565360461557155}
   m_Layer: 0
   m_Name: Star (1)
   m_TagString: Untagged
@@ -430,13 +497,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9188080464718961259}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.20673783, y: -0.029345945, z: 0.13744077, w: 0.96825016}
+  m_LocalRotation: {x: -0.2271159, y: -0.046355847, z: 0.15030953, w: 0.96108097}
   m_LocalPosition: {x: 0.0171, y: 0, z: 0.0016}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5008919610945643806}
-  m_LocalEulerAnglesHint: {x: -23.097, y: -7.098, z: 17.61}
+  m_LocalEulerAnglesHint: {x: -25, y: -10, z: 20}
 --- !u!33 &1709454249153951691
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -465,7 +532,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a3bd1a5fd3d44094ba4eacdda71ff90c, type: 2}
+  - {fileID: 2100000, guid: 5680469cf9e34dc4bbc19cc1ceba883d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -487,3 +554,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &8733565360461557155
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9188080464718961259}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a513792fda8ca724cb9249a56de2a895, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
