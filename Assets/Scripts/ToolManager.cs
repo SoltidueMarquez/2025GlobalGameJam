@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using StartScene;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -14,6 +15,7 @@ public class ToolManager : MonoBehaviour
 
     public EatableTools candy;
     public EatableTools mystery;
+    public EatableTools multiple;
     public GameObject markPrefab;
     
     [HideInInspector] public int curGenerateIndex;
@@ -27,6 +29,7 @@ public class ToolManager : MonoBehaviour
     {
         candy.timer += Time.deltaTime;
         mystery.timer += Time.deltaTime;
+        multiple.timer += Time.deltaTime;
 
         if (candy.timer >= candy.setting.infos[curGenerateIndex].intervalTime)
         {
@@ -38,6 +41,12 @@ public class ToolManager : MonoBehaviour
         {
             CreateMystery();
             mystery.timer = 0f;  // 重置计时器
+        }
+        
+        if (multiple.timer >= multiple.setting.infos[curGenerateIndex].intervalTime)
+        {
+            CreateMystery();
+            multiple.timer = 0f;  // 重置计时器
         }
     }
 
@@ -88,9 +97,19 @@ public class ToolManager : MonoBehaviour
     {
         CreateEatableTool<MysteryBubble>(mystery, pos);
     }
-
     #endregion
 
+    #region 多重气泡
+    private void CreateMultiple()
+    {
+        CreateEatableTool<MultipleBubble>(multiple);
+    }
+    public void CreateMultiple(Vector3 pos)
+    {
+        CreateEatableTool<MultipleBubble>(multiple, pos);
+    }
+    #endregion
+    
     #region 复活标记
     public void CreateMark(Vector3 pos, float time, UnityEvent onEnd)
     {
