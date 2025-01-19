@@ -3,8 +3,8 @@ using UnityEngine.Events;
 
 public class MysteryBubble : MonoBehaviour, IInit
 {
-    public float duration = 8f;
-    public float deltaSpeed = 5f;
+    public float duration = 5f;
+    public float deltaSpeed = 3f;
     public float deltaRadius = 2f;
     public void Init()
     {

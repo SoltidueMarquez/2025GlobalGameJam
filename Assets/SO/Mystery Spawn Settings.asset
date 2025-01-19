@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36aeee0e53294b05a384645b010f0fa3, type: 3}
   m_Name: Mystery Spawn Settings
   m_EditorClassIdentifier: 
-  range: {x: 50, y: 25, z: 2}
+  range: {x: 15, y: 8, z: 2}
   infos:
   - intervalTime: 20
     spawnCount: 1
+  - intervalTime: 17
+    spawnCount: 1
+  - intervalTime: 14
+    spawnCount: 1
   - intervalTime: 10
-    spawnCount: 1
-  - intervalTime: 2
-    spawnCount: 1
-  - intervalTime: 1
     spawnCount: 1
   maxNum: 10

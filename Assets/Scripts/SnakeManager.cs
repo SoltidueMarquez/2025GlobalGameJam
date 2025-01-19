@@ -22,7 +22,7 @@ public class SnakeManager : MonoBehaviour
     public List<SnakeSet> settings = new List<SnakeSet>();
 
     [Header("泡泡相关")]
-    [Tooltip("吸收半径")] public float radius = 10f;
+    [Tooltip("吸收半径")] public float radius = 2f;
     [Tooltip("爆出泡泡的概率"), Range(0, 1)] public float createBubbleRate;
     
     [Header("重生")]
