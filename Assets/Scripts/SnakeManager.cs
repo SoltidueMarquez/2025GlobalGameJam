@@ -63,11 +63,14 @@ public class SnakeManager : MonoBehaviour
     
     public void Reborn(SnakeSet snake)
     {
+        if (snake.ifReborn) return;//避免重复
+        snake.ifReborn = true;//正在重生
         var position = Utils.GetRandomPosition(range.x, range.y, range.z);
         var onEnd = new UnityEvent();
         onEnd.AddListener(() => 
         {
             CreateSnake(snake, position);  // 创建蛇
+            snake.ifReborn = false;
         });
         ToolManager.Instance.CreateMark(position, waitTime, onEnd);
     }
@@ -106,4 +109,5 @@ public class SnakeSet
     public Transform uiParent;
     public Text scoreText;
     public int score;
+    public bool ifReborn = false;
 }

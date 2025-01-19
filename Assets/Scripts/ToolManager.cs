@@ -45,7 +45,7 @@ public class ToolManager : MonoBehaviour
         
         if (multiple.timer >= multiple.setting.infos[curGenerateIndex].intervalTime)
         {
-            CreateMystery();
+            CreateMultiple();
             multiple.timer = 0f;  // 重置计时器
         }
     }
