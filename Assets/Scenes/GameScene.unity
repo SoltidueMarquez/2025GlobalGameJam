@@ -3338,7 +3338,7 @@ MonoBehaviour:
     ifReborn: 0
   radius: 1.5
   createBubbleRate: 0.33333334
-  range: {x: 10, y: 6, z: 2}
+  range: {x: 10, y: 6, z: 4}
   waitTime: 4
 --- !u!1 &1731684941
 GameObject:
