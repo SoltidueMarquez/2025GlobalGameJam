@@ -15,11 +15,11 @@ MonoBehaviour:
   range: {x: 15, y: 8, z: 2}
   infos:
   - intervalTime: 3
-    spawnCount: 1
-  - intervalTime: 2
-    spawnCount: 1
-  - intervalTime: 2
-    spawnCount: 1
-  - intervalTime: 1
-    spawnCount: 1
+    spawnCount: 2
+  - intervalTime: 3
+    spawnCount: 4
+  - intervalTime: 3
+    spawnCount: 6
+  - intervalTime: 3
+    spawnCount: 8
   maxNum: 100
