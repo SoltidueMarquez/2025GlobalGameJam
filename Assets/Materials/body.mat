@@ -51,12 +51,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AddAlpha: 0
-    - _BlendOpacity: 1
+    - _AddAlpha: 0.27
+    - _BlendOpacity: 2.78
     - _Blend_Sharpness: 1
     - _DivideColor: 1
     - _Fresnel_Power: 1.07
-    - _NoiseSubstraction: 0.68
+    - _NoiseSubstraction: 0.61
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors: []
