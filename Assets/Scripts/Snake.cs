@@ -96,7 +96,8 @@ public class Snake : MonoBehaviour
             targetRotation = Quaternion.LookRotation(inputDirection);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, steerSpeed * Time.deltaTime);
         }
-
+        
+        
     }
     #endregion
     

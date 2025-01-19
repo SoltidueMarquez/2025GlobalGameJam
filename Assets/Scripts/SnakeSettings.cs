@@ -10,4 +10,5 @@ public class SnakeSettings : ScriptableObject
     
     public GameObject bodyPrefab;
     public string playerTag;
+    public Color color;
 }
