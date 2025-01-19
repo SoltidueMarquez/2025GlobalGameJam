@@ -211,5 +211,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 8
-  deltaSpeed: 5
+  deltaSpeed: 2
   deltaRadius: 2
